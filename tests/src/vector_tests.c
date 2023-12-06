@@ -266,10 +266,10 @@ ZTEST(zsl_tests, test_vector_scalar_add)
 	zassert_true(rc == 0, NULL);
 
 	/* Check output. */
-	zassert_true(val_is_equal(v.data[0], 5.4, 1E-6), NULL);
-	zassert_true(val_is_equal(v.data[1], -3.1, 1E-6), NULL);
-	zassert_true(val_is_equal(v.data[2], 1.0, 1E-6), NULL);
-	zassert_true(val_is_equal(v.data[3], -7.8, 1E-6), NULL);
+	zassert_true(val_is_equal(v.data[0], 5.4, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(v.data[1], -3.1, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(v.data[2], 1.0, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(v.data[3], -7.8, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_vector_scalar_mult)
@@ -289,10 +289,10 @@ ZTEST(zsl_tests, test_vector_scalar_mult)
 	zassert_true(rc == 0, NULL);
 
 	/* Check output. */
-	zassert_true(val_is_equal(v.data[0], 6.2, 1E-6), NULL);
-	zassert_true(val_is_equal(v.data[1], -7.2, 1E-6), NULL);
-	zassert_true(val_is_equal(v.data[2], -3.2, 1E-6), NULL);
-	zassert_true(val_is_equal(v.data[3], 1.0, 1E-6), NULL);
+	zassert_true(val_is_equal(v.data[0], 6.2, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(v.data[1], -7.2, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(v.data[2], -3.2, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(v.data[3], 1.0, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_vector_scalar_div)
@@ -317,10 +317,10 @@ ZTEST(zsl_tests, test_vector_scalar_div)
 	zassert_true(rc == 0, NULL);
 
 	/* Check output. */
-	zassert_true(val_is_equal(v.data[0], -2.0, 1E-6), NULL);
-	zassert_true(val_is_equal(v.data[1], 4.1538461538, 1E-6), NULL);
-	zassert_true(val_is_equal(v.data[2], 5.8461538461, 1E-6), NULL);
-	zassert_true(val_is_equal(v.data[3], -0.2307692307, 1E-6), NULL);
+	zassert_true(val_is_equal(v.data[0], -2.0, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(v.data[1], 4.1538461538, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(v.data[2], 5.8461538461, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(v.data[3], -0.2307692307, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_vector_dist)
@@ -346,7 +346,7 @@ ZTEST(zsl_tests, test_vector_dist)
 
 	/* Calculate the distance between 'v' and 'w'. */
 	dist = zsl_vec_dist(&v, &w);
-	zassert_true(val_is_equal(dist, 2.2045407685, 1E-6), NULL);
+	zassert_true(val_is_equal(dist, 2.2045407685, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Calculate the distance between 'v' and 'u'. An error is expected
 	 * due to the difference of the vectors in dimension. */
@@ -381,7 +381,7 @@ ZTEST(zsl_tests, test_vector_dot)
 	zassert_true(rc == 0, NULL);
 
 	/* Check the output. */
-	zassert_true(val_is_equal(d, 3.5, 1E-6), NULL);
+	zassert_true(val_is_equal(d, 3.5, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Calculate the dot product of 'v' and 'u'. An error is expected due
 	 * to the difference of the vectors in dimension. */
@@ -405,13 +405,13 @@ ZTEST(zsl_tests, test_vector_norm)
 	norm = zsl_vec_norm(&v);
 
 	/* Check output. */
-	zassert_true(val_is_equal(norm, 4.5486261662, 1E-6), NULL);
+	zassert_true(val_is_equal(norm, 4.5486261662, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Calculate the norm of a NULL vector. */
 	norm = zsl_vec_norm(NULL);
 
 	/* Check output. It should be zero. */
-	zassert_true(val_is_equal(norm, 0.0, 1E-6), NULL);
+	zassert_true(val_is_equal(norm, 0.0, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_vector_project)
@@ -442,9 +442,9 @@ ZTEST(zsl_tests, test_vector_project)
 	zassert_true(rc == 0, NULL);
 
 	/* Check the output vector 't'. */
-	zassert_true(val_is_equal(t.data[0], 2.9357142857, 1E-6), NULL);
-	zassert_true(val_is_equal(t.data[1], 0.9785714286, 1E-6), NULL);
-	zassert_true(val_is_equal(t.data[2], 1.9571428571, 1E-6), NULL);
+	zassert_true(val_is_equal(t.data[0], 2.9357142857, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(t.data[1], 0.9785714286, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(t.data[2], 1.9571428571, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Calculate the projection of 'v' over 'w' and place it on 't'. An
 	 * error is expected due to the differet dimension of the vectors. */
@@ -473,9 +473,9 @@ ZTEST(zsl_tests, test_vector_to_unit)
 	zassert_true(rc == 0, NULL);
 
 	/* Check output. */
-	zassert_true(val_is_equal(v.data[0], 0.6999256369, 1E-6), NULL);
-	zassert_true(val_is_equal(v.data[1], 0.3674609593, 1E-6), NULL);
-	zassert_true(val_is_equal(v.data[2], -0.6124349322, 1E-6), NULL);
+	zassert_true(val_is_equal(v.data[0], 0.6999256369, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(v.data[1], 0.3674609593, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(v.data[2], -0.6124349322, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Make the vector 'w' an unitary one. Since 'w' has a zero norm, it
 	 * will be set to (1.0, 0.0, 0.0). */
@@ -483,9 +483,9 @@ ZTEST(zsl_tests, test_vector_to_unit)
 	zassert_true(rc == 0, NULL);
 
 	/* Check output. */
-	zassert_true(val_is_equal(w.data[0], 1.0, 1E-6), NULL);
-	zassert_true(val_is_equal(w.data[1], 0.0, 1E-6), NULL);
-	zassert_true(val_is_equal(w.data[2], 0.0, 1E-6), NULL);
+	zassert_true(val_is_equal(w.data[0], 1.0, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(w.data[1], 0.0, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(w.data[2], 0.0, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_vector_cross)
@@ -516,9 +516,9 @@ ZTEST(zsl_tests, test_vector_cross)
 	zassert_true(rc == 0, NULL);
 
 	/* Check the output vector 't'. */
-	zassert_true(val_is_equal(t.data[0], -4.5, 1E-6), NULL);
-	zassert_true(val_is_equal(t.data[1], 5.3, 1E-6), NULL);
-	zassert_true(val_is_equal(t.data[2], 4.1, 1E-6), NULL);
+	zassert_true(val_is_equal(t.data[0], -4.5, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(t.data[1], 5.3, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(t.data[2], 4.1, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Calculate the cross product of 'v' times 'w' and place it on 't'. An
 	 * error is expected due to the differet dimension of the vectors. */
@@ -542,7 +542,7 @@ ZTEST(zsl_tests, test_vector_sum_of_sqrs)
 	sum = zsl_vec_sum_of_sqrs(&v);
 
 	/* Check output. */
-	zassert_true(val_is_equal(sum, 16.41, 1E-6), NULL);
+	zassert_true(val_is_equal(sum, 16.41, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 // TODO: Analyse instruction fault in vector mean
@@ -588,9 +588,9 @@ ZTEST(zsl_tests, test_vector_sum_of_sqrs)
 // 	zassert_true(rc == 0, NULL);
 
 // 	/* Check the output. */
-// 	zassert_true(val_is_equal(var.data[0], 1.0, 1E-6), NULL);
-// 	zassert_true(val_is_equal(var.data[1], 0.5, 1E-6), NULL);
-// 	zassert_true(val_is_equal(var.data[2], -2.0, 1E-6), NULL);
+// 	zassert_true(val_is_equal(var.data[0], 1.0, ZSL_CONSTANT(1E-6)), NULL);
+// 	zassert_true(val_is_equal(var.data[1], 0.5, ZSL_CONSTANT(1E-6)), NULL);
+// 	zassert_true(val_is_equal(var.data[2], -2.0, ZSL_CONSTANT(1E-6)), NULL);
 
 // 	/* Perform the arithmetic mean on the 'vlist3' array of none vectors. */
 // 	rc = zsl_vec_mean(vlist3, 0, &var);
@@ -627,7 +627,7 @@ ZTEST(zsl_tests, test_vector_ar_mean)
 	zassert_true(rc == 0, NULL);
 
 	/* Check the output. */
-	zassert_true(val_is_equal(mean, 1.0, 1E-6), NULL);
+	zassert_true(val_is_equal(mean, 1.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Calculate the arithmetic mean of the vector 'v2'. Since it has a
 	 * size of zero, this should return an error. */
@@ -684,7 +684,7 @@ ZTEST(zsl_tests, test_vector_zte)
 	/* Check the output. */
 	zassert_equal(v.data[0], 2.0, NULL);
 #ifdef CONFIG_ZSL_SINGLE_PRECISION
-	zassert_true(val_is_equal(v.data[1], 0.1, 1E-5), NULL);
+	zassert_true(val_is_equal(v.data[1], 0.1, ZSL_CONSTANT(1E-5)), NULL);
 #else
 	zassert_equal(v.data[1], 0.1, NULL);
 #endif
@@ -743,11 +743,11 @@ ZTEST(zsl_tests, test_vector_is_equal)
 	zsl_real_t b[3] = { 0.0, 1.0, 2.0 };
 
 	/* Check for unequal size. */
-	eq = zsl_vec_is_equal(&v, &x, 1E-5);
+	eq = zsl_vec_is_equal(&v, &x, ZSL_CONSTANT(1E-5));
 	zassert_false(eq, NULL);
 
 	/* Check equality for zero value vectors. */
-	eq = zsl_vec_is_equal(&v, &w, 1E-5);
+	eq = zsl_vec_is_equal(&v, &w, ZSL_CONSTANT(1E-5));
 	zassert_true(eq, NULL);
 
 	/* Assign the array a to vector v. */
@@ -757,12 +757,12 @@ ZTEST(zsl_tests, test_vector_is_equal)
 	zassert_true(rc == 0, NULL);
 
 	/* Check equality for array value vectors. */
-	eq = zsl_vec_is_equal(&v, &w, 1E-5);
+	eq = zsl_vec_is_equal(&v, &w, ZSL_CONSTANT(1E-5));
 	zassert_true(eq, NULL);
 
 	/* Check for inequality. */
 	v.data[0] = 1.0;
-	eq = zsl_vec_is_equal(&v, &w, 1E-5);
+	eq = zsl_vec_is_equal(&v, &w, ZSL_CONSTANT(1E-5));
 	zassert_false(eq, NULL);
 
 	/* Check for inequality < epsilon (should still pass). */
@@ -772,30 +772,30 @@ ZTEST(zsl_tests, test_vector_is_equal)
 	w.data[0] = 0.999999;
 	w.data[1] = 2.0;
 	w.data[2] = 3.0;
-	eq = zsl_vec_is_equal(&v, &w, 1E-5);
+	eq = zsl_vec_is_equal(&v, &w, ZSL_CONSTANT(1E-5));
 	zassert_true(eq, NULL);
 
 	/* Check for inequality > epsilon (should fail). */
 	w.data[0] = 0.99998;
-	eq = zsl_vec_is_equal(&v, &w, 1E-5);
+	eq = zsl_vec_is_equal(&v, &w, ZSL_CONSTANT(1E-5));
 	zassert_false(eq, NULL);
 
 	/* Check for negative inequality < epsilon (should pass). */
 	v.data[0] = -1.0;
 	w.data[0] = -0.999999;
-	eq = zsl_vec_is_equal(&v, &w, 1E-5);
+	eq = zsl_vec_is_equal(&v, &w, ZSL_CONSTANT(1E-5));
 	zassert_true(eq, NULL);
 
 	/* Check for negative inequality > epsilon (should fail). */
 	v.data[0] = -1.0;
 	w.data[0] = -0.99998;
-	eq = zsl_vec_is_equal(&v, &w, 1E-5);
+	eq = zsl_vec_is_equal(&v, &w, ZSL_CONSTANT(1E-5));
 	zassert_false(eq, NULL);
 
 	/* Check for negative inequality > epsilon (should fail). */
 	v.data[0] = -1.0;
 	w.data[0] = -1.00001;
-	eq = zsl_vec_is_equal(&v, &w, 1E-5);
+	eq = zsl_vec_is_equal(&v, &w, ZSL_CONSTANT(1E-5));
 	zassert_false(eq, NULL);
 }
 
@@ -841,13 +841,13 @@ ZTEST(zsl_tests, test_vector_contains)
 	v.data[3] = 2.0;
 	v.data[4] = 1.0;
 
-	count = zsl_vec_contains(&v, 0.0, 1E-5);
+	count = zsl_vec_contains(&v, 0.0, ZSL_CONSTANT(1E-5));
 	zassert_equal(count, 1, NULL);
-	count = zsl_vec_contains(&v, 1.0, 1E-5);
+	count = zsl_vec_contains(&v, 1.0, ZSL_CONSTANT(1E-5));
 	zassert_equal(count, 2, NULL);
-	count = zsl_vec_contains(&v, 2.0, 1E-5);
+	count = zsl_vec_contains(&v, 2.0, ZSL_CONSTANT(1E-5));
 	zassert_equal(count, 2, NULL);
-	count = zsl_vec_contains(&v, 3.0, 1E-5);
+	count = zsl_vec_contains(&v, 3.0, ZSL_CONSTANT(1E-5));
 	zassert_equal(count, 0, NULL);
 }
 

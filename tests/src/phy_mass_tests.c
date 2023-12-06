@@ -36,9 +36,9 @@ ZTEST(zsl_tests, test_phy_mass_center)
 
 	rc = zsl_phy_mass_center(&m1, &x1, &y1, &z1, &mx, &my, &mz);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(mx, 1.0, 1E-6), NULL);
-	zassert_true(val_is_equal(my, 0.05, 1E-6), NULL);
-	zassert_true(val_is_equal(mz, 2.0, 1E-6), NULL);
+	zassert_true(val_is_equal(mx, 1.0, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(my, 0.05, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(mz, 2.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example with 6 objects. */
 	ZSL_VECTOR_DEF(m2, 6);
@@ -58,9 +58,9 @@ ZTEST(zsl_tests, test_phy_mass_center)
 
 	rc = zsl_phy_mass_center(&m2, &x2, &y2, &z2, &mx, &my, &mz);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(mx, 3.176923077, 1E-6), NULL);
-	zassert_true(val_is_equal(my, 0.7572649573, 1E-6), NULL);
-	zassert_true(val_is_equal(mz, 3.458547009, 1E-6), NULL);
+	zassert_true(val_is_equal(mx, 3.176923077, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(my, 0.7572649573, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(mz, 3.458547009, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example in which some of the objects have negative mass. */
 	ZSL_VECTOR_DEF(m3, 3);

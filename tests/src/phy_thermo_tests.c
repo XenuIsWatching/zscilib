@@ -19,12 +19,12 @@ ZTEST(zsl_tests, test_phy_thermo_fahren_cels)
 	/* Fahrenheit to celsius. */
 	rc = zsl_phy_thermo_fahren_cels(41.0, &t2, false);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(t2, 5.0, 1E-6), NULL);
+	zassert_true(val_is_equal(t2, 5.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Celsius to fahrenheit. */
 	rc = zsl_phy_thermo_fahren_cels(5.0, &t2, true);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(t2, 41.0, 1E-6), NULL);
+	zassert_true(val_is_equal(t2, 41.0, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_phy_thermo_cels_kel)
@@ -35,15 +35,15 @@ ZTEST(zsl_tests, test_phy_thermo_cels_kel)
 	/* Celsius to kelvin. */
 	rc = zsl_phy_thermo_cels_kel(27.0, &t2, false);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(t2, 300.15, 1E-6), NULL);
+	zassert_true(val_is_equal(t2, 300.15, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Kelvin to celsius. */
 	rc = zsl_phy_thermo_cels_kel(300.15, &t2, true);
 	zassert_true(rc == 0, NULL);
 #ifdef CONFIG_ZSL_SINGLE_PRECISION
- 	zassert_true(val_is_equal(t2, 27.0, 1E-5), NULL);
+ 	zassert_true(val_is_equal(t2, 27.0, ZSL_CONSTANT(1E-5)), NULL);
 #else
-	zassert_true(val_is_equal(t2, 27.0, 1E-8), NULL);
+	zassert_true(val_is_equal(t2, 27.0, ZSL_CONSTANT(1E-8)), NULL);
 #endif
 }
 
@@ -54,7 +54,7 @@ ZTEST(zsl_tests, test_phy_thermo_heat_fusion)
 	
 	rc = zsl_phy_thermo_heat_fusion(3.0, 334.0, &q);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q, 1002.0, 1E-6), NULL);
+	zassert_true(val_is_equal(q, 1002.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative mass. */
 	rc = zsl_phy_thermo_heat_fusion(-3.0, 334.0, &q);
@@ -77,9 +77,9 @@ ZTEST(zsl_tests, test_phy_thermo_heat)
 	rc = zsl_phy_thermo_heat(3.0, 4.18, 17.0, &q);
 	zassert_true(rc == 0, NULL);
 #ifdef CONFIG_ZSL_SINGLE_PRECISION
- 	zassert_true(val_is_equal(q, 213.18, 1E-4), NULL);
+ 	zassert_true(val_is_equal(q, 213.18, ZSL_CONSTANT(1E-4)), NULL);
 #else
-	zassert_true(val_is_equal(q, 213.18, 1E-8), NULL);
+	zassert_true(val_is_equal(q, 213.18, ZSL_CONSTANT(1E-8)), NULL);
 #endif
 
 	/* Example for negative mass. */
@@ -100,18 +100,18 @@ ZTEST(zsl_tests, test_phy_thermo_expan)
 	int rc;
 	zsl_real_t l;
 	
-	rc = zsl_phy_thermo_expan(33.0, 11.4E-6, 530.0, &l);
+	rc = zsl_phy_thermo_expan(33.0, ZSL_CONSTANT(11.4E-6), 530.0, &l);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(l, 33.199386, 1E-6), NULL);
+	zassert_true(val_is_equal(l, 33.199386, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative initial length. */
-	rc = zsl_phy_thermo_expan(-33.0, 11.4E-6, 530.0, &l);
+	rc = zsl_phy_thermo_expan(-33.0, ZSL_CONSTANT(11.4E-6), 530.0, &l);
 	zassert_true(rc == -EINVAL, NULL);
 	/* IEEE standard states that x != x is true only for NAN values. */
 	zassert_true(l != l, NULL);
 	
 	/* Example for negative 'a'. */
-	rc = zsl_phy_thermo_expan(33.0, -11.4E-6, 530.0, &l);
+	rc = zsl_phy_thermo_expan(33.0, ZSL_CONSTANT(-11.4E-6), 530.0, &l);
 	zassert_true(rc == -EINVAL, NULL);
 	/* IEEE standard states that x != x is true only for NAN values. */
 	zassert_true(l != l, NULL);
@@ -122,30 +122,30 @@ ZTEST(zsl_tests, test_phy_thermo_mean_free_path)
 	int rc;
 	zsl_real_t lambda;
 	
-	rc = zsl_phy_thermo_mean_free_path(6.02E23, 2.75E-10, &lambda);
+	rc = zsl_phy_thermo_mean_free_path(ZSL_CONSTANT(6.02E23), ZSL_CONSTANT(2.75E-10), &lambda);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(lambda, 4.9439406725, 1E-6), NULL);
+	zassert_true(val_is_equal(lambda, 4.9439406725, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative 'nv'. */
-	rc = zsl_phy_thermo_mean_free_path(-6.02E23, 2.75E-10, &lambda);
+	rc = zsl_phy_thermo_mean_free_path(ZSL_CONSTANT(-6.02E23), ZSL_CONSTANT(2.75E-10), &lambda);
 	zassert_true(rc == -EINVAL, NULL);
 	/* IEEE standard states that x != x is true only for NAN values. */
 	zassert_true(lambda != lambda, NULL);
 	
 	/* Example for zero 'nv'. */
-	rc = zsl_phy_thermo_mean_free_path(0.0, 2.75E-10, &lambda);
+	rc = zsl_phy_thermo_mean_free_path(0.0, ZSL_CONSTANT(2.75E-10), &lambda);
 	zassert_true(rc == -EINVAL, NULL);
 	/* IEEE standard states that x != x is true only for NAN values. */
 	zassert_true(lambda != lambda, NULL);
 	
 	/* Example for negative molecule's diameter. */
-	rc = zsl_phy_thermo_mean_free_path(6.02E23, -2.75E-10, &lambda);
+	rc = zsl_phy_thermo_mean_free_path(ZSL_CONSTANT(6.02E23), ZSL_CONSTANT(-2.75E-10), &lambda);
 	zassert_true(rc == -EINVAL, NULL);
 	/* IEEE standard states that x != x is true only for NAN values. */
 	zassert_true(lambda != lambda, NULL);
 	
 	/* Example for zero molecule's diameter. */
-	rc = zsl_phy_thermo_mean_free_path(6.02E23, 0.0, &lambda);
+	rc = zsl_phy_thermo_mean_free_path(ZSL_CONSTANT(6.02E23), 0.0, &lambda);
 	zassert_true(rc == -EINVAL, NULL);
 	/* IEEE standard states that x != x is true only for NAN values. */
 	zassert_true(lambda != lambda, NULL);
@@ -158,7 +158,7 @@ ZTEST(zsl_tests, test_phy_thermo_effic_heat_engine)
 	
 	rc = zsl_phy_thermo_effic_heat_engine(340.0, 500.0, &e);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(e, 0.32, 1E-6), NULL);
+	zassert_true(val_is_equal(e, 0.32, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for qh = 0. */
 	rc = zsl_phy_thermo_effic_heat_engine(340.0, 0.0, &e);
@@ -180,7 +180,7 @@ ZTEST(zsl_tests, test_phy_thermo_carnot_engine)
 	
 	rc = zsl_phy_thermo_carnot_engine(263.0, 340.0, 312.0, &qh);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(qh, 403.3460076046, 1E-6), NULL);
+	zassert_true(val_is_equal(qh, 403.3460076046, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative cold temperature. */
 	rc = zsl_phy_thermo_carnot_engine(-263.0, 340.0, 312.0, &qh);

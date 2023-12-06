@@ -18,10 +18,10 @@ void gravitation_demo(void)
 	printf("Physics gravitation API demo\n");
 	printf("----------------------------\n\n");
 
-	zsl_real_t me = 5.972E24;       /* Mass of the Earth. */
+	zsl_real_t me = ZSL_CONSTANT(5.972E24);       /* Mass of the Earth. */
 	zsl_real_t msat = 750;          /* Mass of a medium artif. satellite. */
-	zsl_real_t re = 6.731E6;        /* Radius of the Earth. */
-	zsl_real_t tropo = 18E3;        /* Average height of the troposphere. */
+	zsl_real_t re = ZSL_CONSTANT(6.731E6);        /* Radius of the Earth. */
+	zsl_real_t tropo = ZSL_CONSTANT(18E3);        /* Average height of the troposphere. */
 
 	printf("An artificial satellite with a mass of %f kg is\n", msat);
 	printf("going to be launched into space.\n\n");
@@ -73,7 +73,7 @@ void gravitation_demo(void)
 	/* Calculate the kinetic energy in joules. */
 	zsl_phy_ener_kin(v, msat, &ke);
 	/* Convert value to kilojoules. */
-	ke /= 1E3;
+	ke /= ZSL_CONSTANT(1E3);
 
 	zsl_real_t e = u + ke;
 

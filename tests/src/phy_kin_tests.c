@@ -18,7 +18,7 @@ ZTEST(zsl_tests, test_phy_kin_dist)
 
 	rc = zsl_phy_kin_dist(15.0, 5.0, -2.0, &dist);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(dist, 50.0, 1E-6), NULL);
+	zassert_true(val_is_equal(dist, 50.0, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for negative time. */
 	rc = zsl_phy_kin_dist(15.0, -1.0, -2.0, &dist);
@@ -34,7 +34,7 @@ ZTEST(zsl_tests, test_phy_kin_init_pos)
 
 	rc = zsl_phy_kin_init_pos(15.0, 5.0, -2.0, 70.0, &xi);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(xi, 20.0, 1E-6), NULL);
+	zassert_true(val_is_equal(xi, 20.0, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for negative time. */
 	rc = zsl_phy_kin_init_pos(15.0, -1.0, -2.0, 70.0, &xi);
@@ -50,7 +50,7 @@ ZTEST(zsl_tests, test_phy_kin_init_pos2)
 
 	rc = zsl_phy_kin_init_pos2(10.0, 12.0, 2.0, 20.0, &xi);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(xi, 9.0, 1E-6), NULL);
+	zassert_true(val_is_equal(xi, 9.0, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero acceleration. */
 	rc = zsl_phy_kin_init_pos2(10.0, 12.0, 0.0, 20.0, &xi);
@@ -66,7 +66,7 @@ ZTEST(zsl_tests, test_phy_kin_time)
 
 	rc = zsl_phy_kin_time(15.0, 10.0, -5.0, &time);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(time, 1.0, 1E-6), NULL);
+	zassert_true(val_is_equal(time, 1.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative time. */
 	rc = zsl_phy_kin_time(15.0, 10.0, 5.0, &time);
@@ -88,7 +88,7 @@ ZTEST(zsl_tests, test_phy_kin_vel)
 
 	rc = zsl_phy_kin_vel(30.0, 10.0, -5.0, &vf);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(vf, -20.0, 1E-6), NULL);
+	zassert_true(val_is_equal(vf, -20.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative time. */
 	rc = zsl_phy_kin_vel(30.0, -10.0, -5.0, &vf);
@@ -104,7 +104,7 @@ ZTEST(zsl_tests, test_phy_kin_vel2)
 
 	rc = zsl_phy_kin_vel2(5.0, 12.0, 6.0, &vf);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(vf, 13.0, 1E-6), NULL);
+	zassert_true(val_is_equal(vf, 13.0, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for complex final velocity. */
 	rc = zsl_phy_kin_vel2(5.0, 12.0, -6.0, &vf);
@@ -120,7 +120,7 @@ ZTEST(zsl_tests, test_phy_kin_init_vel)
 
 	rc = zsl_phy_kin_init_vel(15.0, 6.0, 2.0, &vi);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(vi, 3.0, 1E-6), NULL);
+	zassert_true(val_is_equal(vi, 3.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative time. */
 	rc = zsl_phy_kin_init_vel(15.0, 6.0, -2.0, &vi);
@@ -136,7 +136,7 @@ ZTEST(zsl_tests, test_phy_kin_init_vel2)
 
 	rc = zsl_phy_kin_init_vel2(24.0, 2.0, 4.0, &vi);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(vi, 2.0, 1E-6), NULL);
+	zassert_true(val_is_equal(vi, 2.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative time. */
 	rc = zsl_phy_kin_init_vel2(24.0, 2.0, -4.0, &vi);
@@ -158,7 +158,7 @@ ZTEST(zsl_tests, test_phy_kin_init_vel3)
 
 	rc = zsl_phy_kin_init_vel3(4.0, 2.0, 3.0, &vi);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(vi, 2.0, 1E-6), NULL);
+	zassert_true(val_is_equal(vi, 2.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for complex initial velocity. */
 	rc = zsl_phy_kin_init_vel3(4.0, 4.0, 3.0, &vi);
@@ -174,7 +174,7 @@ ZTEST(zsl_tests, test_phy_kin_av_vel)
 
 	rc = zsl_phy_kin_av_vel(15.0, 5.0, &vel);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(vel, 3.0, 1E-6), NULL);
+	zassert_true(val_is_equal(vel, 3.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for zero time. */
 	rc = zsl_phy_kin_av_vel(15.0, 0.0, &vel);
@@ -196,7 +196,7 @@ ZTEST(zsl_tests, test_phy_kin_accel)
 
 	rc = zsl_phy_kin_accel(15.0, -5.0, 4.0, &accel);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(accel, -5.0, 1E-6), NULL);
+	zassert_true(val_is_equal(accel, -5.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for zero time. */
 	rc = zsl_phy_kin_accel(15.0, -5.0, 0.0, &accel);
@@ -218,7 +218,7 @@ ZTEST(zsl_tests, test_phy_kin_ener)
 
 	rc = zsl_phy_kin_ener(10.0, 1.1, &ke);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(ke, 55.0, 1E-6), NULL);
+	zassert_true(val_is_equal(ke, 55.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative mass. */
 	rc = zsl_phy_kin_ener(10.0, -1.1, &ke);

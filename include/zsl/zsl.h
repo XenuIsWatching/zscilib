@@ -51,6 +51,12 @@ typedef float zsl_real_t;
 typedef double zsl_real_t;
 #endif
 
+#ifdef CONFIG_ZSL_SINGLE_PRECISION
+#define ZSL_CONSTANT(x) x##f
+#else
+#define ZSL_CONSTANT(x) x
+#endif
+
 /* Map math functions based on single or double precision. */
 /* TODO: Add an option for fast approximations of trig operations. */
 #if CONFIG_ZSL_SINGLE_PRECISION

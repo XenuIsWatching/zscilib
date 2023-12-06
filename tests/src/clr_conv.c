@@ -17,9 +17,9 @@ ZTEST(zsl_tests, test_conv_spd_xyz)
 
 	rc = zsl_clr_conv_spd_xyz(&zsl_clr_test_spd_5983k, ZSL_CLR_OBS_2_DEG, &xyz);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(xyz.xyz_x, 0.9516492, 1E-5), NULL);
-	zassert_true(val_is_equal(xyz.xyz_y, 1.0, 1E-5), NULL);
-	zassert_true(val_is_equal(xyz.xyz_z, 1.0056107, 1E-5), NULL);
+	zassert_true(val_is_equal(xyz.xyz_x, 0.9516492, ZSL_CONSTANT(1E-5)), NULL);
+	zassert_true(val_is_equal(xyz.xyz_y, 1.0, ZSL_CONSTANT(1E-5)), NULL);
+	zassert_true(val_is_equal(xyz.xyz_z, 1.0056107, ZSL_CONSTANT(1E-5)), NULL);
 	zassert_true(xyz.observer == ZSL_CLR_OBS_2_DEG, NULL);
 	zassert_false(xyz.x_invalid, NULL);
 	zassert_false(xyz.y_invalid, NULL);
@@ -35,9 +35,9 @@ ZTEST(zsl_tests, test_conv_ct_xyz)
 
 	rc = zsl_clr_conv_ct_xyz(5600.0, ZSL_CLR_OBS_2_DEG, &xyz);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(xyz.xyz_x, 0.9738203, 1E-6), NULL);
-	zassert_true(val_is_equal(xyz.xyz_y, 1.0, 1E-6), NULL);
-	zassert_true(val_is_equal(xyz.xyz_z, 0.9751908, 1E-6), NULL);
+	zassert_true(val_is_equal(xyz.xyz_x, 0.9738203, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(xyz.xyz_y, 1.0, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(xyz.xyz_z, 0.9751908, ZSL_CONSTANT(1E-6)), NULL);
 	zassert_true(xyz.observer == ZSL_CLR_OBS_2_DEG, NULL);
 	zassert_false(xyz.x_invalid, NULL);
 	zassert_false(xyz.y_invalid, NULL);
@@ -85,8 +85,8 @@ ZTEST(zsl_tests, test_conv_cct_xyy)
 
 	/* Check the xyY output to the sixth decimal place. */
 	/* 2900 CCT = xyY (0.4442166, 0.4064293, 1.000000) w/5 nm lookup. */
-	zassert_true(val_is_equal(xyy.xyy_x, 0.4442166, 1E-6), NULL);
-	zassert_true(val_is_equal(xyy.xyy_y, 0.4064293, 1E-6), NULL);
+	zassert_true(val_is_equal(xyy.xyy_x, 0.4442166, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(xyy.xyy_y, 0.4064293, ZSL_CONSTANT(1E-6)), NULL);
 	zassert_true(xyy.xyy_Y == 1.0, NULL);
 	zassert_true(xyy.observer == ZSL_CLR_OBS_2_DEG, NULL);
 	zassert_false(xyy.x_invalid, NULL);
@@ -107,11 +107,11 @@ ZTEST(zsl_tests, test_conv_cct_xyy)
 	 *     xyY (0.4401769103, 0.4030829267, 1.000000)
 	 */
 #if CONFIG_ZSL_SINGLE_PRECISION
-	zassert_true(val_is_equal(xyy.xyy_x, 0.4399290, 1E-3), NULL);
-	zassert_true(val_is_equal(xyy.xyy_y, 0.4030270, 1E-3), NULL);
+	zassert_true(val_is_equal(xyy.xyy_x, 0.4399290, ZSL_CONSTANT(1E-3)), NULL);
+	zassert_true(val_is_equal(xyy.xyy_y, 0.4030270, ZSL_CONSTANT(1E-3)), NULL);
 #else
-	zassert_true(val_is_equal(xyy.xyy_x, 0.4401715, 1E-6), NULL);
-	zassert_true(val_is_equal(xyy.xyy_y, 0.4030739, 1E-6), NULL);
+	zassert_true(val_is_equal(xyy.xyy_x, 0.4401715, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(xyy.xyy_y, 0.4030739, ZSL_CONSTANT(1E-6)), NULL);
 #endif
 	zassert_true(xyy.xyy_Y == 1.0, NULL);
 	zassert_true(xyy.observer == ZSL_CLR_OBS_2_DEG, NULL);
@@ -138,9 +138,9 @@ ZTEST(zsl_tests, test_conv_cct_xyz)
 
 	/* Check the XYZ output to the sixth decimal place. */
 	/* 2900K CCT = XYZ (1.0929741, 1.0, 0.3674785) w/5nm lookup. */
-	zassert_true(val_is_equal(xyz.xyz_x, 1.0929741, 1E-6), NULL);
-	zassert_true(val_is_equal(xyz.xyz_y, 1.00000000, 1E-6), NULL);
-	zassert_true(val_is_equal(xyz.xyz_z, 0.3674785, 1E-6), NULL);
+	zassert_true(val_is_equal(xyz.xyz_x, 1.0929741, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(xyz.xyz_y, 1.00000000, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(xyz.xyz_z, 0.3674785, ZSL_CONSTANT(1E-6)), NULL);
 	zassert_true(xyz.observer == ZSL_CLR_OBS_2_DEG, NULL);
 	zassert_false(xyz.x_invalid, NULL);
 	zassert_false(xyz.y_invalid, NULL);
@@ -160,14 +160,14 @@ ZTEST(zsl_tests, test_conv_cct_xyz)
 	 *     XYZ (1.092025687995, 1.0, 0.388853391245)
 	 */
 #if CONFIG_ZSL_SINGLE_PRECISION
-	zassert_true(val_is_equal(xyz.xyz_x, 1.092025687995, 1E-3), NULL);
-	zassert_true(val_is_equal(xyz.xyz_y, 1.00000000, 1E-3), NULL);
-	zassert_true(val_is_equal(xyz.xyz_z, 0.388853391245, 1E-3), NULL);
+	zassert_true(val_is_equal(xyz.xyz_x, 1.092025687995, ZSL_CONSTANT(1E-3)), NULL);
+	zassert_true(val_is_equal(xyz.xyz_y, 1.00000000, ZSL_CONSTANT(1E-3)), NULL);
+	zassert_true(val_is_equal(xyz.xyz_z, 0.388853391245, ZSL_CONSTANT(1E-3)), NULL);
 #else
 	/* TODO: Figure out why only accurate to four places? :( */
-	zassert_true(val_is_equal(xyz.xyz_x, 1.092025687995, 1E-4), NULL);
-	zassert_true(val_is_equal(xyz.xyz_y, 1.00000000, 1E-4), NULL);
-	zassert_true(val_is_equal(xyz.xyz_z, 0.388853391245, 1E-4), NULL);
+	zassert_true(val_is_equal(xyz.xyz_x, 1.092025687995, ZSL_CONSTANT(1E-4)), NULL);
+	zassert_true(val_is_equal(xyz.xyz_y, 1.00000000, ZSL_CONSTANT(1E-4)), NULL);
+	zassert_true(val_is_equal(xyz.xyz_z, 0.388853391245, ZSL_CONSTANT(1E-4)), NULL);
 #endif
 	zassert_true(xyz.observer == ZSL_CLR_OBS_2_DEG, NULL);
 	zassert_false(xyz.x_invalid, NULL);

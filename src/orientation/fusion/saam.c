@@ -27,8 +27,8 @@ static int zsl_fus_saam(struct zsl_vec *a, struct zsl_vec *m,
 
 	/* Return an error if either of the data in the sensors is missing or
 	 * zero. */
-	if ((m == NULL) || (ZSL_ABS(zsl_vec_norm(m)) < 1E-6) ||
-	    (a == NULL) || (ZSL_ABS(zsl_vec_norm(a)) < 1E-6)) {
+	if ((m == NULL) || (ZSL_ABS(zsl_vec_norm(m)) < ZSL_CONSTANT(1E-6)) ||
+	    (a == NULL) || (ZSL_ABS(zsl_vec_norm(a)) < ZSL_CONSTANT(1E-6))) {
 		rc = -EINVAL;
 		goto err;
 	}

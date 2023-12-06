@@ -82,7 +82,7 @@ zsl_phy_thermo_mean_free_path(zsl_real_t nv, zsl_real_t d, zsl_real_t *lambda)
 		return -EINVAL;
 	}
 
-	*lambda = 1.0E6 / (ZSL_PI * ZSL_SQRT(2.0) * nv * d * d);
+	*lambda = ZSL_CONSTANT(1.0E6) / (ZSL_PI * ZSL_SQRT(2.0) * nv * d * d);
 
 	return 0;
 }

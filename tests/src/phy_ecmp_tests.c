@@ -18,7 +18,7 @@ ZTEST(zsl_tests, test_phy_ecmp_capac_cpv)
 
 	rc = zsl_phy_ecmp_capac_cpv(100.0, 10.0, &c);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(c, 10.0, 1E-6), NULL);
+	zassert_true(val_is_equal(c, 10.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	rc = zsl_phy_ecmp_capac_cpv(100.0, 0.0, &c);
 	zassert_true(rc == -EINVAL, NULL);
@@ -32,11 +32,11 @@ ZTEST(zsl_tests, test_phy_ecmp_capac_ad)
 	zsl_real_t c;
 
 	/* E * 0.015 m^2 plate / 0.006 m gap = 22.135 pF */
-	rc = zsl_phy_ecmp_capac_ad(150E-4, 0.6E-2, &c);
+	rc = zsl_phy_ecmp_capac_ad(ZSL_CONSTANT(150E-4), ZSL_CONSTANT(0.6E-2), &c);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(c, 2.2135E-11, 1E-13), NULL);
+	zassert_true(val_is_equal(c, ZSL_CONSTANT(2.2135E-11), ZSL_CONSTANT(1E-13)), NULL);
 
-	rc = zsl_phy_ecmp_capac_ad(150E-4, 0.0, &c);
+	rc = zsl_phy_ecmp_capac_ad(ZSL_CONSTANT(150E-4), 0.0, &c);
 	zassert_true(rc == -EINVAL, NULL);
 	/* IEEE standard states that x != x is true only for NAN values. */
 	zassert_true(c != c, NULL);
@@ -49,7 +49,7 @@ ZTEST(zsl_tests, test_phy_ecmp_ener_capac)
 
 	rc = zsl_phy_ecmp_ener_capac(3.0, 1.0, &e);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(e, 1.5, 1E-6), NULL);
+	zassert_true(val_is_equal(e, 1.5, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_phy_ecmp_ener_induc)
@@ -59,7 +59,7 @@ ZTEST(zsl_tests, test_phy_ecmp_ener_induc)
 
 	rc = zsl_phy_ecmp_ener_induc(3.0, 1.0, &e);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(e, 1.5, 1E-6), NULL);
+	zassert_true(val_is_equal(e, 1.5, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_phy_ecmp_trans)
@@ -69,7 +69,7 @@ ZTEST(zsl_tests, test_phy_ecmp_trans)
 
 	rc = zsl_phy_ecmp_trans(5, 2.0, 10, &v2);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(v2, 4.0, 1E-6), NULL);
+	zassert_true(val_is_equal(v2, 4.0, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero 't1'. */
 	rc = zsl_phy_ecmp_trans(0, 2.0, 10, &v2);
@@ -85,7 +85,7 @@ ZTEST(zsl_tests, test_phy_ecmp_rlc_volt)
 
 	rc = zsl_phy_ecmp_rlc_volt(5.0, 2.0, 10.0, &v);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(v, 9.4339811321, 1E-6), NULL);
+	zassert_true(val_is_equal(v, 9.4339811321, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_phy_ecmp_rc_charg_i)
@@ -95,7 +95,7 @@ ZTEST(zsl_tests, test_phy_ecmp_rc_charg_i)
 
 	rc = zsl_phy_ecmp_rc_charg_i(200.0, 2.0, 10.0, 6.7, &i);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(i, 6.5345764106, 1E-6), NULL);
+	zassert_true(val_is_equal(i, 6.5345764106, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero 'r * c'. */
 	rc = zsl_phy_ecmp_rc_charg_i(0.0, 0.0, 10.0, 6.7, &i);
@@ -123,7 +123,7 @@ ZTEST(zsl_tests, test_phy_ecmp_rc_charg_q)
 
 	rc = zsl_phy_ecmp_rc_charg_q(200.0, 2.0, 10.0, 6.7, &q);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q, 0.1654235894, 1E-6), NULL);
+	zassert_true(val_is_equal(q, 0.1654235894, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero 'r * c'. */
 	rc = zsl_phy_ecmp_rc_charg_q(0.0, 0.0, 10.0, 6.7, &q);
@@ -151,7 +151,7 @@ ZTEST(zsl_tests, test_phy_ecmp_rc_discharg_i)
 
 	rc = zsl_phy_ecmp_rc_discharg_i(200.0, 2.0, 10.0, 6.7, &i);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(i, -6.5345764106, 1E-6), NULL);
+	zassert_true(val_is_equal(i, -6.5345764106, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero 'r * c'. */
 	rc = zsl_phy_ecmp_rc_discharg_i(0.0, 0.0, 10.0, 6.7, &i);
@@ -179,7 +179,7 @@ ZTEST(zsl_tests, test_phy_ecmp_rc_discharg_q)
 
 	rc = zsl_phy_ecmp_rc_discharg_q(200.0, 2.0, 10.0, 6.7, &q);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q, 6.5345764106, 1E-6), NULL);
+	zassert_true(val_is_equal(q, 6.5345764106, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero 'r * c'. */
 	rc = zsl_phy_ecmp_rc_discharg_q(0.0, 0.0, 10.0, 6.7, &q);
@@ -207,7 +207,7 @@ ZTEST(zsl_tests, test_phy_ecmp_rl_current)
 
 	rc = zsl_phy_ecmp_rl_current(2.0, 2.0, 10.0, 6.7, &i);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(i, 6.6996958205, 1E-6), NULL);
+	zassert_true(val_is_equal(i, 6.6996958205, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero 'l'. */
 	rc = zsl_phy_ecmp_rl_current(200.0, 0.0, 10.0, 6.7, &i);

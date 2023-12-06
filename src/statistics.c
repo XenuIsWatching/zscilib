@@ -76,7 +76,7 @@ int zsl_sta_weighted_mean(struct zsl_vec *v, struct zsl_vec *w, zsl_real_t *m)
 	}
 
 	/* Make sure that not all of the weights are zero. */
-	if (ZSL_ABS(sumw) < 1E-6) {
+	if (ZSL_ABS(sumw) < ZSL_CONSTANT(1E-6)) {
 		return -EINVAL;
 	}
 #endif
@@ -106,7 +106,7 @@ int zsl_sta_time_weighted_mean(struct zsl_vec *v, struct zsl_vec *t,
 	}
 	/* The vector 'x' can't have any repeated values. */
 	for (size_t i = 0; i < t->sz; i++) {
-		if (zsl_vec_contains(t, t->data[i], 1E-6) > 1) {
+		if (zsl_vec_contains(t, t->data[i], ZSL_CONSTANT(1E-6)) > 1) {
 			return -EINVAL;
 		}
 	}
@@ -121,7 +121,7 @@ int zsl_sta_time_weighted_mean(struct zsl_vec *v, struct zsl_vec *t,
 
 	for (size_t i = 0; i < t->sz; i++) {
 		for (size_t g = 0; g < t->sz; g++) {
-			if (ZSL_ABS(ts.data[i] - t->data[g]) < 1E-6) {
+			if (ZSL_ABS(ts.data[i] - t->data[g]) < ZSL_CONSTANT(1E-6)) {
 				vs.data[i] = v->data[g];
 			}
 		}
@@ -206,7 +206,7 @@ int zsl_sta_weighted_median(struct zsl_vec *v, struct zsl_vec *w, zsl_real_t *m)
 	}
 
 	/* Make sure that that the sum of the weights is 1. */
-	if (ZSL_ABS(sum - 1.0) > 1E-6) {
+	if (ZSL_ABS(sum - 1.0) > ZSL_CONSTANT(1E-6)) {
 		return -EINVAL;
 	}
 #endif
@@ -223,7 +223,7 @@ int zsl_sta_weighted_median(struct zsl_vec *v, struct zsl_vec *w, zsl_real_t *m)
 	zsl_vec_init(&vsort);
 	zsl_vec_sort(v, &vsort);
 
-	if (ZSL_ABS(lsum - 0.5) < 1E-6) {
+	if (ZSL_ABS(lsum - 0.5) < ZSL_CONSTANT(1E-6)) {
 		*m = (vsort.data[i - 1] + vsort.data[i - 2]) / 2.0;
 	} else {
 		*m = vsort.data[i - 1];
@@ -271,7 +271,7 @@ int zsl_sta_mode(struct zsl_vec *v, struct zsl_vec *w)
 	zsl_vec_init(w);
 
 	for (i = 0; i < v->sz; i++) {
-		count = zsl_vec_contains(v, v->data[i], 1E-7);
+		count = zsl_vec_contains(v, v->data[i], ZSL_CONSTANT(1E-7));
 		u.data[i] = count;
 		if (count > maxcount) {
 			maxcount = count;
@@ -289,15 +289,15 @@ int zsl_sta_mode(struct zsl_vec *v, struct zsl_vec *w)
 	count = 0;
 
 	for (i = 0; i < j; i++) {
-		if (w_temp.data[i] >= 1E-5 || w_temp.data[i] <= 1E-5) {
-			if (zsl_vec_contains(w, w_temp.data[i], 1E-5) == 0) {
+		if (w_temp.data[i] >= ZSL_CONSTANT(1E-5) || w_temp.data[i] <= ZSL_CONSTANT(1E-5)) {
+			if (zsl_vec_contains(w, w_temp.data[i], ZSL_CONSTANT(1E-5)) == 0) {
 				w->data[count] = w_temp.data[i];
 				count++;
 			}
 		}
 	}
 
-	if (zsl_vec_contains(&w_temp, 0.0, 1E-5) > 0) {
+	if (zsl_vec_contains(&w_temp, 0.0, ZSL_CONSTANT(1E-5)) > 0) {
 		count++;
 	}
 
@@ -501,7 +501,7 @@ int zsl_sta_mult_linear_reg(struct zsl_mtx *x, struct zsl_vec *y,
 
 	zsl_real_t det;
 	zsl_mtx_deter(&xx, &det);
-	if (ZSL_ABS(det) < 1E-6) {
+	if (ZSL_ABS(det) < ZSL_CONSTANT(1E-6)) {
 		/*
 		 * Currently limited to square matrices. pinv could be used,
 		 * but is too resource-intensive to add at the momemt.
@@ -542,7 +542,7 @@ int zsl_sta_weighted_mult_linear_reg(struct zsl_mtx *x, struct zsl_vec *y,
 	}
 	/* Make sure no weight is zero. */
 	for (size_t k = 0; k < w->sz; k++) {
-		if (ZSL_ABS(w->data[k]) < 1E-6) {
+		if (ZSL_ABS(w->data[k]) < ZSL_CONSTANT(1E-6)) {
 			return -EINVAL;
 		}
 	}
@@ -584,7 +584,7 @@ int zsl_sta_weighted_mult_linear_reg(struct zsl_mtx *x, struct zsl_vec *y,
 
 	zsl_real_t det;
 	zsl_mtx_deter(&xx, &det);
-	if (ZSL_ABS(det) < 1E-6) {
+	if (ZSL_ABS(det) < ZSL_CONSTANT(1E-6)) {
 		/*
 		 * Currently limited to square matrices. pinv could be used,
 		 * but is too resource-intensive to add at the momemt.

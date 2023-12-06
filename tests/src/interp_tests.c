@@ -22,19 +22,19 @@ ZTEST(zsl_tests, test_interp_lerp)
 	/* Test 1: Normal conversion. */
 	rc = zsl_interp_lerp(v0, v1, t, &v);
 	zassert_equal(rc, 0, NULL);
-	zassert_true(val_is_equal(v, 0.15, 1E-4), NULL);
+	zassert_true(val_is_equal(v, 0.15, ZSL_CONSTANT(1E-4)), NULL);
 
 	/* Test 2: t = 0. */
 	t = 0.0f;
 	rc = zsl_interp_lerp(v0, v1, t, &v);
 	zassert_equal(rc, 0, NULL);
-	zassert_true(val_is_equal(v, v0, 1E-4), NULL);
+	zassert_true(val_is_equal(v, v0, ZSL_CONSTANT(1E-4)), NULL);
 
 	/* Test 3: t = 1.0. */
 	t = 1.0f;
 	rc = zsl_interp_lerp(v0, v1, t, &v);
 	zassert_equal(rc, 0, NULL);
-	zassert_true(val_is_equal(v, v1, 1E-4), NULL);
+	zassert_true(val_is_equal(v, v1, ZSL_CONSTANT(1E-4)), NULL);
 
 	/* Test 4: t = -0.01 (invalid value). */
 	t = -0.01f;
@@ -491,7 +491,7 @@ ZTEST(zsl_tests, test_interp_cubic_arr)
 	n = sizeof xyc / sizeof xyc[0];
 
 	/* Calculate y2 values for xyc. */
-	rc = zsl_interp_cubic_calc(xyc, n, 1e30, 1e30);
+	rc = zsl_interp_cubic_calc(xyc, n, ZSL_CONSTANT(1e30), ZSL_CONSTANT(1e30));
 	zassert_equal(rc, 0, NULL);
 
 	/* Test 1: Try to find x = -1.25 (valid range) */

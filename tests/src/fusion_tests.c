@@ -55,37 +55,37 @@ ZTEST(zsl_tests, test_fus_madgwick)
 	/* Run the Madgwick algorithm. */
 	rc = madg_drv.feed_handler(&a, &m, &g, NULL, &q, madg_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999735780642940, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.0039920127935612, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0044945146835265, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, 0.0040873395881737, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999735780642940, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.0039920127935612, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0044945146835265, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, 0.0040873395881737, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the Madgwick algorithm with inclination angle provided. */
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = madg_drv.feed_handler(&a, &m, &g, &incl, &q, madg_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999757062543757, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.0049228858339429, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0031924380087654, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, 0.0037630354354918, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999757062543757, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.0049228858339429, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0031924380087654, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, 0.0037630354354918, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the Madgwick algorithm without accelerometer data. */
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = madg_drv.feed_handler(NULL, &m, &g, NULL, &q, madg_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999988575019580, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, 0.0004499994858759, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0013999984005027, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.0003499996001257, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999988575019580, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, 0.0004499994858759, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0013999984005027, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.0003499996001257, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the Madgwick algorithm without magnetometer data. */
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = madg_drv.feed_handler(&a, NULL, &g, NULL, &q, madg_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999774110335876, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.0065495169685490, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0014692704230066, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.0003499920938618, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999774110335876, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.0065495169685490, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0014692704230066, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.0003499920938618, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the Madgwick algorithm without gyroscope data. */
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
@@ -99,10 +99,10 @@ ZTEST(zsl_tests, test_fus_madgwick)
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = madg_drv.feed_handler(&a, &m, &g, NULL, &q, madg_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999988575019580, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, 0.0004499994858759, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0013999984005027, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.0003499996001257, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999988575019580, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, 0.0004499994858759, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0013999984005027, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.0003499996001257, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the Madgwick algorithm with invalid magnetometer data. */
 	a.data[0] = 0.01;
@@ -114,10 +114,10 @@ ZTEST(zsl_tests, test_fus_madgwick)
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = madg_drv.feed_handler(&a, &m, &g, NULL, &q, madg_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999774110335876, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.0065495169685490, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0014692704230066, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.0003499920938618, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999774110335876, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.0065495169685490, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0014692704230066, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.0003499920938618, ZSL_CONSTANT(1E-6)), NULL);
 
 	ZSL_VECTOR_DEF(a2, 5);
 	ZSL_VECTOR_DEF(m2, 5);
@@ -206,10 +206,10 @@ ZTEST(zsl_tests, test_fus_mahony)
 	/* Run the Mahony algorithm. */
 	rc = mahn_drv.feed_handler(&a, &m, &g, NULL, &q, mahn_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999308295647051, 1E-4), NULL);
-	zassert_true(val_is_equal(q.i, -0.0068815222147659, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0065074388222656, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, 0.0069738065661901, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999308295647051, ZSL_CONSTANT(1E-4)), NULL);
+	zassert_true(val_is_equal(q.i, -0.0068815222147659, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0065074388222656, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, 0.0069738065661901, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the Mahony algorithm with inclination angle provided. */
 	a.data[0] = 0.01;
@@ -227,10 +227,10 @@ ZTEST(zsl_tests, test_fus_mahony)
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = mahn_drv.feed_handler(&a, &m, &g, &incl, &q, mahn_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999134883142473, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.0097283268194340, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0047955090791204, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, 0.0074416824173269, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999134883142473, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.0097283268194340, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0047955090791204, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, 0.0074416824173269, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the Mahony algorithm without accelerometer data. */
 	a.data[0] = 0.01;
@@ -248,10 +248,10 @@ ZTEST(zsl_tests, test_fus_mahony)
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = mahn_drv.feed_handler(NULL, &m, &g, NULL, &q, mahn_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999988575019580, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, 0.0004499994858759, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0013999984005027, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.0003499996001257, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999988575019580, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, 0.0004499994858759, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0013999984005027, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.0003499996001257, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the Mahony algorithm without magnetometer data. */
 	a.data[0] = 0.01;
@@ -269,10 +269,10 @@ ZTEST(zsl_tests, test_fus_mahony)
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = mahn_drv.feed_handler(&a, NULL, &g, NULL, &q, mahn_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999532404548704, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.0095471287140318, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0014989158007184, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.0003499836341592, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999532404548704, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.0095471287140318, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0014989158007184, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.0003499836341592, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the Mahony algorithm without gyroscope data. */
 	a.data[0] = 0.01;
@@ -307,10 +307,10 @@ ZTEST(zsl_tests, test_fus_mahony)
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = mahn_drv.feed_handler(&a, &m, &g, NULL, &q, mahn_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999988575019580, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, 0.0004499994858759, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0013999984005027, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.0003499996001257, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999988575019580, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, 0.0004499994858759, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0013999984005027, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.0003499996001257, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the Mahony algorithm with invalid magnetometer data. */
 	a.data[0] = 0.01;
@@ -328,10 +328,10 @@ ZTEST(zsl_tests, test_fus_mahony)
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = mahn_drv.feed_handler(&a, &m, &g, NULL, &q, mahn_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999532404548704, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.0095471287140318, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0014989158007184, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.0003499836341592, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999532404548704, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.0095471287140318, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0014989158007184, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.0003499836341592, ZSL_CONSTANT(1E-6)), NULL);
 
 	a.data[0] = 0.01;
 	a.data[1] = -1.01;
@@ -423,28 +423,28 @@ ZTEST(zsl_tests, test_fus_saam)
 	/* Run the SAAM algorithm. */
 	rc = saam_drv.feed_handler(&a, &m, &g, NULL, &q, saam_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.1934598725297102, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.1905244514984266, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.6881852932869889, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, 0.6728110531237675, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.1934598725297102, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.1905244514984266, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.6881852932869889, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, 0.6728110531237675, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the SAAM algorithm with inclination angle provided. It should give
 	 * the same results. */
 	rc = saam_drv.feed_handler(&a, &m, &g, &incl, &q, saam_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.1934598725297102, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.1905244514984266, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.6881852932869889, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, 0.6728110531237675, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.1934598725297102, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.1905244514984266, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.6881852932869889, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, 0.6728110531237675, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the SAAM algorithm without gyroscope data. It should give the same
 	 * results. */
 	rc = saam_drv.feed_handler(&a, &m, NULL, NULL, &q, saam_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.1934598725297102, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.1905244514984266, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.6881852932869889, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, 0.6728110531237675, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.1934598725297102, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.1905244514984266, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.6881852932869889, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, 0.6728110531237675, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the SAAM algorithm without magnetometer data. An error is
 	 * expected. */
@@ -550,28 +550,28 @@ ZTEST(zsl_tests, test_fus_complementary)
 	/* Run the complementary algorithm. */
 	rc = comp_drv.feed_handler(&a, &m, &g, NULL, &q, comp_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.7806422574656674, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.4621974380629751, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, 0.2979802370474076, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, 0.2969494442427867, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.7806422574656674, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.4621974380629751, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, 0.2979802370474076, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, 0.2969494442427867, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the complementary algorithm with inclination angle provided. */
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = comp_drv.feed_handler(&a, &m, &g, &incl, &q, comp_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.7806422574656674, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.4621974380629751, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, 0.2979802370474076, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, 0.2969494442427867, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.7806422574656674, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.4621974380629751, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, 0.2979802370474076, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, 0.2969494442427867, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the complementary algorithm without magnetometer data. */
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = comp_drv.feed_handler(&a, NULL, &g, NULL, &q, comp_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999988575019579, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, 0.0004499994858759, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0013999984005027, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.0003499996001257, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999988575019579, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, 0.0004499994858759, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0013999984005027, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.0003499996001257, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the complementary algorithm with invalid magnetometer data. */
 	m.data[0] = 0.0;
@@ -580,10 +580,10 @@ ZTEST(zsl_tests, test_fus_complementary)
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = comp_drv.feed_handler(&a, &m, &g, NULL, &q, comp_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999988575019579, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, 0.0004499994858759, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0013999984005027, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.0003499996001257, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999988575019579, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, 0.0004499994858759, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0013999984005027, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.0003499996001257, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the complementary algorithm without accelerometer data. */
 	m.data[0] = -66.0;
@@ -592,10 +592,10 @@ ZTEST(zsl_tests, test_fus_complementary)
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = comp_drv.feed_handler(NULL, &m, &g, NULL, &q, comp_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999988575019579, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, 0.0004499994858759, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0013999984005027, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.0003499996001257, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999988575019579, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, 0.0004499994858759, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0013999984005027, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.0003499996001257, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the complementary algorithm with invalid accelerometer data. */
 	a.data[0] = 0.0;
@@ -604,10 +604,10 @@ ZTEST(zsl_tests, test_fus_complementary)
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = comp_drv.feed_handler(&a, &m, &g, NULL, &q, comp_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999988575019579, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, 0.0004499994858759, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0013999984005027, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.0003499996001257, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999988575019579, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, 0.0004499994858759, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0013999984005027, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.0003499996001257, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the complementary algorithm with no gyroscope. */
 	a.data[0] = 0.01;
@@ -706,10 +706,10 @@ ZTEST(zsl_tests, test_fus_aqua)
 	/* Run the AQUA algorithm. */
 	rc = aqua_drv.feed_handler(&a, &m, &g, NULL, &q, aqua_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.7269775641540803, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.0012887113095840, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, 0.0007083207036711, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.6866596381916891, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.7269775641540803, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.0012887113095840, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, 0.0007083207036711, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.6866596381916891, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the AQUA algorithm with inclination angle provided. */
 	a.data[0] = 0.01;
@@ -727,28 +727,28 @@ ZTEST(zsl_tests, test_fus_aqua)
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = aqua_drv.feed_handler(&a, &m, &g, &incl, &q, aqua_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.7269775641540803, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.0012887113095840, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, 0.0007083207036711, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.6866596381916891, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.7269775641540803, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.0012887113095840, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, 0.0007083207036711, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.6866596381916891, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the AQUA algorithm without accelerometer data. */
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = aqua_drv.feed_handler(NULL, &m, &g, NULL, &q, aqua_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999988575019580, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, 0.0004499994858759, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, -0.0013999984005027, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, -0.0003499996001257, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999988575019580, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, 0.0004499994858759, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, -0.0013999984005027, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, -0.0003499996001257, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the AQUA algorithm without magnetometer data. */
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = aqua_drv.feed_handler(&a, NULL, &g, NULL, &q, aqua_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999988575019580, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.0004499994858759, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, 0.0013999984005027, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, 0.0003499996001257, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999988575019580, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.0004499994858759, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, 0.0013999984005027, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, 0.0003499996001257, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the AQUA algorithm without gyroscope data. */
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
@@ -770,10 +770,10 @@ ZTEST(zsl_tests, test_fus_aqua)
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = aqua_drv.feed_handler(&a, &m, &g, NULL, &q, aqua_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999988575019580, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.0004499994858759, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, 0.0013999984005027, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, 0.0003499996001257, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999988575019580, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.0004499994858759, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, 0.0013999984005027, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, 0.0003499996001257, ZSL_CONSTANT(1E-6)), NULL);
 
 	// /* Run the AQUA algorithm with invalid magnetometer data. */
 	a.data[0] = 0.01;
@@ -790,10 +790,10 @@ ZTEST(zsl_tests, test_fus_aqua)
 	zsl_quat_init(&q, ZSL_QUAT_TYPE_IDENTITY);
 	rc = aqua_drv.feed_handler(&a, &m, &g, NULL, &q, aqua_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.9999988575019580, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, -0.0004499994858759, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, 0.0013999984005027, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, 0.0003499996001257, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.9999988575019580, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, -0.0004499994858759, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, 0.0013999984005027, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, 0.0003499996001257, ZSL_CONSTANT(1E-6)), NULL);
 
 	ZSL_VECTOR_DEF(a2, 5);
 	ZSL_VECTOR_DEF(m2, 5);
@@ -906,18 +906,18 @@ ZTEST(zsl_tests, test_fus_kalman)
 	/* Run the kalman algorithm. */
 	rc = kalm_drv.feed_handler(&a, &m, &g, NULL, &q, kalm_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.3186651048490019, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, 0.6386866767275943, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, 0.4721142772080947, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, 0.5173393365852964, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.3186651048490019, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, 0.6386866767275943, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, 0.4721142772080947, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, 0.5173393365852964, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the kalman algorithm with dip angle provided. */
 	rc = kalm_drv.feed_handler(&a, &m, &g, &incl, &q, kalm_drv.config);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(q.r, 0.7715963603719183, 1E-6), NULL);
-	zassert_true(val_is_equal(q.i, 0.0123858064715810, 1E-6), NULL);
-	zassert_true(val_is_equal(q.j, 0.5043103125990586, 1E-6), NULL);
-	zassert_true(val_is_equal(q.k, 0.3875006542769926, 1E-6), NULL);
+	zassert_true(val_is_equal(q.r, 0.7715963603719183, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.i, 0.0123858064715810, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.j, 0.5043103125990586, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(q.k, 0.3875006542769926, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Run the kalman algorithm without accelerometer data. An error
 	 * is expected. */

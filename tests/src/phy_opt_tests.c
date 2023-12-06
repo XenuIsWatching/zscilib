@@ -18,7 +18,7 @@ ZTEST(zsl_tests, test_phy_opt_refrac_index)
 	
 	rc = zsl_phy_opt_refrac_index(ZSL_LIGHT_SPEED * 0.9, &n);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(n, 0.9, 1E-6), NULL);
+	zassert_true(val_is_equal(n, 0.9, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative velocity. */
 	rc = zsl_phy_opt_refrac_index(-ZSL_LIGHT_SPEED * 0.9, &n);
@@ -40,7 +40,7 @@ ZTEST(zsl_tests, test_phy_opt_snell)
 	
 	rc = zsl_phy_opt_snell(0.3, 0.4, 0.8, &o2);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(o2, 0.5680829219, 1E-6), NULL);
+	zassert_true(val_is_equal(o2, 0.5680829219, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative 'n1'. */
 	rc = zsl_phy_opt_snell(-0.3, 0.4, 0.8, &o2);
@@ -74,7 +74,7 @@ ZTEST(zsl_tests, test_phy_opt_focus)
 	
 	rc = zsl_phy_opt_focus(3.0, -2.0, &f);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(f, -6.0, 1E-6), NULL);
+	zassert_true(val_is_equal(f, -6.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for sr + si = 0. */
 	rc = zsl_phy_opt_focus(3.0, -3.0, &f);
@@ -90,7 +90,7 @@ ZTEST(zsl_tests, test_phy_opt_critic_angle)
 	
 	rc = zsl_phy_opt_critic_angle(0.7, 0.4, &oc);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(oc, 0.6082455789, 1E-6), NULL);
+	zassert_true(val_is_equal(oc, 0.6082455789, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative 'n1'. */
 	rc = zsl_phy_opt_critic_angle(-0.7, 0.4, &oc);
@@ -125,12 +125,12 @@ ZTEST(zsl_tests, test_phy_opt_power)
 	/* Example for positive focal length. */
 	rc = zsl_phy_opt_power(2.0, &p);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(p, 0.5, 1E-6), NULL);
+	zassert_true(val_is_equal(p, 0.5, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for negative focal length. */
 	rc = zsl_phy_opt_power(-5.0, &p);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(p, -0.2, 1E-6), NULL);
+	zassert_true(val_is_equal(p, -0.2, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for zero focal length. */
 	rc = zsl_phy_opt_power(0.0, &p);
@@ -146,7 +146,7 @@ ZTEST(zsl_tests, test_phy_opt_magn)
 	
 	rc = zsl_phy_opt_magn(2.2, 4.4, &m);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(m, 2.0, 1E-6), NULL);
+	zassert_true(val_is_equal(m, 2.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative 'y1'. */
 	rc = zsl_phy_opt_magn(-2.2, 4.4, &m);
@@ -175,9 +175,9 @@ ZTEST(zsl_tests, test_phy_opt_dif)
 	rc = zsl_phy_opt_dif(3, 550.0, 0.9, &d);
 	zassert_true(rc == 0, NULL);
 #ifdef CONFIG_ZSL_SINGLE_PRECISION
- 	zassert_true(val_is_equal(d, 2106.4002522072, 1E-3), NULL);
+ 	zassert_true(val_is_equal(d, 2106.4002522072, ZSL_CONSTANT(1E-3)), NULL);
 #else
-	zassert_true(val_is_equal(d, 2106.4002522072, 1E-8), NULL);
+	zassert_true(val_is_equal(d, 2106.4002522072, ZSL_CONSTANT(1E-8)), NULL);
 #endif
 
 	/* Example for negative wavelength. */

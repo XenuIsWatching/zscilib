@@ -26,7 +26,7 @@ static int zsl_fus_comp(struct zsl_vec *a, struct zsl_vec *m,
 		goto err;
 	}
 	/* Make sure that the input quaternion is not zero. */
-	if (ZSL_ABS(zsl_quat_magn(q)) < 1E-6) {
+	if (ZSL_ABS(zsl_quat_magn(q)) < ZSL_CONSTANT(1E-6)) {
 		rc = -EINVAL;
 		goto err;
 	}
@@ -42,8 +42,8 @@ static int zsl_fus_comp(struct zsl_vec *a, struct zsl_vec *m,
 
 	/* Continue with the calculations only if the data from the accelerometer
 	 * and magnetometer is valid (non zero). */
-	if ((m != NULL) && (ZSL_ABS(zsl_vec_norm(m)) > 1E-6) &&
-	    (a != NULL) && (ZSL_ABS(zsl_vec_norm(a)) > 1E-6)) {
+	if ((m != NULL) && (ZSL_ABS(zsl_vec_norm(m)) > ZSL_CONSTANT(1E-6)) &&
+	    (a != NULL) && (ZSL_ABS(zsl_vec_norm(a)) > ZSL_CONSTANT(1E-6))) {
 		/* Estimate the orientation (q_am) using the acceleration and magnetic
 		 * field data to calculate the attitude. Then convert this orientation
 		 * to a unit quaternion. */

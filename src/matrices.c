@@ -830,7 +830,7 @@ zsl_mtx_gauss_elim(struct zsl_mtx *m, struct zsl_mtx *mg, struct zsl_mtx *mi,
 {
 	int rc;
 	zsl_real_t x, y;
-	zsl_real_t epsilon = 1E-6;
+	zsl_real_t epsilon = ZSL_CONSTANT(1E-6);
 
 	/* Make a copy of matrix m. */
 	rc = zsl_mtx_copy(mg, m);
@@ -860,7 +860,7 @@ zsl_mtx_gauss_elim(struct zsl_mtx *m, struct zsl_mtx *mg, struct zsl_mtx *mi,
 		}
 		/* Get the value of (p, j), aborting if value is zero. */
 		zsl_mtx_get(mg, p, j, &x);
-		if ((x >= 1E-6) || (x <= -1E-6)) {
+		if ((x >= ZSL_CONSTANT(1E-6)) || (x <= ZSL_CONSTANT(-1E-6))) {
 			rc = zsl_mtx_sum_rows_scaled_d(mg, p, i, -(x / y));
 
 			if (rc) {
@@ -887,7 +887,7 @@ zsl_mtx_gauss_reduc(struct zsl_mtx *m, struct zsl_mtx *mi,
 		    struct zsl_mtx *mg)
 {
 	zsl_real_t v[m->sz_rows];
-	zsl_real_t epsilon = 1E-6;
+	zsl_real_t epsilon = ZSL_CONSTANT(1E-6);
 	zsl_real_t x;
 	zsl_real_t y;
 
@@ -986,7 +986,7 @@ zsl_mtx_norm_elem(struct zsl_mtx *m, struct zsl_mtx *mn, struct zsl_mtx *mi,
 {
 	int rc;
 	zsl_real_t x;
-	zsl_real_t epsilon = 1E-6;
+	zsl_real_t epsilon = ZSL_CONSTANT(1E-6);
 
 	/* Make a copy of matrix m. */
 	rc = zsl_mtx_copy(mn, m);
@@ -1431,7 +1431,7 @@ zsl_mtx_eigenvalues(struct zsl_mtx *m, struct zsl_vec *v, size_t iter)
 	 * single-precision floats the numbers can still be quite large, so
 	 * we need to set a delta of +/- 0.001 in this case. */
 
-	zsl_real_t epsilon = 1E-6;
+	zsl_real_t epsilon = ZSL_CONSTANT(1E-6);
 
 	ZSL_MATRIX_DEF(mout, m->sz_rows, m->sz_rows);
 	ZSL_MATRIX_DEF(mtemp, m->sz_rows, m->sz_rows);
@@ -1533,7 +1533,7 @@ zsl_mtx_eigenvectors(struct zsl_mtx *m, struct zsl_mtx *mev, size_t iter,
 	size_t count = 0;       /* Number of eigenvectors for an eigenvalue. */
 	size_t ga = 0;
 
-	zsl_real_t epsilon = 1E-6;
+	zsl_real_t epsilon = ZSL_CONSTANT(1E-6);
 	zsl_real_t x;
 
 	/* The vector where all eigenvalues will be stored. */
@@ -1688,7 +1688,7 @@ zsl_mtx_svd(struct zsl_mtx *m, struct zsl_mtx *u, struct zsl_mtx *e,
 	zsl_real_t d;
 	size_t pu = 0;
 	size_t min = m->sz_cols;
-	zsl_real_t epsilon = 1E-6;
+	zsl_real_t epsilon = ZSL_CONSTANT(1E-6);
 
 	zsl_mtx_trans(m, &at);
 
@@ -1759,7 +1759,7 @@ zsl_mtx_pinv(struct zsl_mtx *m, struct zsl_mtx *pinv, size_t iter)
 {
 	zsl_real_t x;
 	size_t min = m->sz_cols;
-	zsl_real_t epsilon = 1E-6;
+	zsl_real_t epsilon = ZSL_CONSTANT(1E-6);
 
 	ZSL_MATRIX_DEF(u, m->sz_rows, m->sz_rows);
 	ZSL_MATRIX_DEF(e, m->sz_rows, m->sz_cols);
@@ -1911,7 +1911,7 @@ zsl_mtx_is_sym(struct zsl_mtx *m)
 	zsl_real_t x;
 	zsl_real_t y;
 	zsl_real_t diff;
-	zsl_real_t epsilon = 1E-6;
+	zsl_real_t epsilon = ZSL_CONSTANT(1E-6);
 
 	for (size_t i = 0; i < m->sz_rows; i++) {
 		for (size_t j = 0; j < m->sz_cols; j++) {

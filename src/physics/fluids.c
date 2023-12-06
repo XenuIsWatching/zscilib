@@ -43,7 +43,7 @@ zsl_phy_fluid_press(zsl_real_t p0, zsl_real_t h, zsl_real_t d, zsl_real_t *p)
 		return -EINVAL;
 	}
 
-	*p = p0 + h * d * ZSL_GRAV_EARTH * 1.0E-3;
+	*p = p0 + h * d * ZSL_GRAV_EARTH * ZSL_CONSTANT(1.0E-3);
 
 	return 0;
 }
@@ -56,7 +56,7 @@ zsl_phy_fluid_bouyant_force(zsl_real_t v, zsl_real_t d, zsl_real_t *f)
 		return -EINVAL;
 	}
 
-	*f = v * d * ZSL_GRAV_EARTH * 1.0E-3;
+	*f = v * d * ZSL_GRAV_EARTH * ZSL_CONSTANT(1.0E-3);
 
 	return 0;
 }
@@ -102,7 +102,7 @@ zsl_phy_fluid_bernoulli(zsl_real_t d, zsl_real_t v1, zsl_real_t p1,
 	 * p1 + 0.5 * d * v1 * v1 = p2 + 0.5 * d * v2 * v2
 	 */
 
-	*p2 = p1 + 0.5 * d * (v1 * v1 - v2 * v2) * 1.0E-3;
+	*p2 = p1 + 0.5 * d * (v1 * v1 - v2 * v2) * ZSL_CONSTANT(1.0E-3);
 
 	return 0;
 }

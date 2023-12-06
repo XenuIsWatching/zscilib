@@ -14,7 +14,7 @@
 
 #ifndef EPSILON
 /* Define EPSILON for floating point comparisons. */
-#define EPSILON 1e-6
+#define EPSILON ZSL_CONSTANT(1e-6)
 #endif
 
 void svd_demo(void)

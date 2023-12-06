@@ -368,7 +368,7 @@ int zsl_vec_rev(struct zsl_vec *v)
 int zsl_vec_zte(struct zsl_vec *v)
 {
 	size_t x = 0;
-	zsl_real_t epsilon = 1E-6;
+	zsl_real_t epsilon = ZSL_CONSTANT(1E-6);
 
 	for (size_t g = 0; g < v->sz; g++) {
 		if ((v->data[g - x] >= 0.0 && v->data[g - x] < epsilon) ||
@@ -484,15 +484,15 @@ int zsl_vec_sort(struct zsl_vec *v, struct zsl_vec *w)
 
 	/* Copy the vector 'v' into the vector 'u' with no repeated values. */
 	for (j = 0; j < v->sz; j++) {
-		if (v->data[j] >= 1E-5 || v->data[j] <= 1E-5) {
-			if (zsl_vec_contains(&u, v->data[j], 1E-5) == 0) {
+		if (v->data[j] >= ZSL_CONSTANT(1E-5) || v->data[j] <= ZSL_CONSTANT(1E-5)) {
+			if (zsl_vec_contains(&u, v->data[j], ZSL_CONSTANT(1E-5)) == 0) {
 				u.data[count] = v->data[j];
 				count++;
 			}
 		}
 	}
 
-	if (zsl_vec_contains(v, 0.0, 1E-5) > 0) {
+	if (zsl_vec_contains(v, 0.0, ZSL_CONSTANT(1E-5)) > 0) {
 		count++;
 	}
 
@@ -503,7 +503,7 @@ int zsl_vec_sort(struct zsl_vec *v, struct zsl_vec *w)
 
 	/* Add back the repeated values in the correct order into the vector 'w'. */
 	for (i = 0; i < count; i++) {
-		for (k = 0; k < zsl_vec_contains(v, u.data[i], 1E-5); k++) {
+		for (k = 0; k < zsl_vec_contains(v, u.data[i], ZSL_CONSTANT(1E-5)); k++) {
 			w->data[count2] = u.data[i];
 			count2++;
 		}

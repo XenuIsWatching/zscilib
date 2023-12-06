@@ -18,11 +18,11 @@ ZTEST(zsl_tests, test_prob_uniform_pdf)
 
 	x = 0.0;
 	rc = zsl_prob_uni_pdf(&a, &b, &x);
-	zassert_true(val_is_equal(rc, 0.0, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 4.0;
 	rc = zsl_prob_uni_pdf(&a, &b, &x);
-	zassert_true(val_is_equal(rc, 0.5, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.5, ZSL_CONSTANT(1E-6)), NULL);
 
 	rc = zsl_prob_uni_pdf(&b, &a, &x);
 	zassert_true(rc == -EINVAL, NULL);
@@ -36,7 +36,7 @@ ZTEST(zsl_tests, test_prob_uniform_mean)
 	/* Calculate the mean. */
 	rc = zsl_prob_uni_mean(&a, &b, &m);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(m, 4.0, 1E-6), NULL);
+	zassert_true(val_is_equal(m, 4.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	rc = zsl_prob_uni_mean(&b, &a, &m);
 	zassert_true(rc == -EINVAL, NULL);
@@ -50,7 +50,7 @@ ZTEST(zsl_tests, test_prob_uniform_variance)
 	/* Calculate the variance. */
 	rc = zsl_prob_uni_var(&a, &b, &v);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(v, 0.75, 1E-6), NULL);
+	zassert_true(val_is_equal(v, 0.75, ZSL_CONSTANT(1E-6)), NULL);
 
 	rc = zsl_prob_uni_var(&b, &a, &v);
 	zassert_true(rc == -EINVAL, NULL);
@@ -63,23 +63,23 @@ ZTEST(zsl_tests, test_prob_uniform_cdf)
 
 	x = 0.0;
 	rc = zsl_prob_uni_cdf(&a, &b, &x);
-	zassert_true(val_is_equal(rc, 0.0, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 3.5;
 	rc = zsl_prob_uni_cdf(&a, &b, &x);
-	zassert_true(val_is_equal(rc, 0.25, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.25, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 4.0;
 	rc = zsl_prob_uni_cdf(&a, &b, &x);
-	zassert_true(val_is_equal(rc, 0.5, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.5, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 5.0;
 	rc = zsl_prob_uni_cdf(&a, &b, &x);
-	zassert_true(val_is_equal(rc, 1, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 1, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 8.0;
 	rc = zsl_prob_uni_cdf(&a, &b, &x);
-	zassert_true(val_is_equal(rc, 1, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 1, ZSL_CONSTANT(1E-6)), NULL);
 
 	rc = zsl_prob_uni_cdf(&b, &a, &x);
 	zassert_true(rc == -EINVAL, NULL);
@@ -92,15 +92,15 @@ ZTEST(zsl_tests, test_prob_normal_pdf)
 
 	x = 0.0;
 	rc = zsl_prob_normal_pdf(&m, &s, &x);
-	zassert_true(val_is_equal(rc, 0.3989422804, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.3989422804, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 2.0;
 	rc = zsl_prob_normal_pdf(&m, &s, &x);
-	zassert_true(val_is_equal(rc, 0.05399096651, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.05399096651, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = -2.0;
 	rc = zsl_prob_normal_pdf(&m, &s, &x);
-	zassert_true(val_is_equal(rc, 0.05399096651, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.05399096651, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_prob_normal_cdf)
@@ -110,15 +110,15 @@ ZTEST(zsl_tests, test_prob_normal_cdf)
 
 	x = 0.0;
 	rc = zsl_prob_normal_cdf(&m, &s, &x);
-	zassert_true(val_is_equal(rc, 0.5, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.5, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 2.0;
 	rc = zsl_prob_normal_cdf(&m, &s, &x);
-	zassert_true(val_is_equal(rc, 0.9772498680518208, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.9772498680518208, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = -2.0;
 	rc = zsl_prob_normal_cdf(&m, &s, &x);
-	zassert_true(val_is_equal(rc, 1. - 0.9772498680518208, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 1. - 0.9772498680518208, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_prob_erf_inverse)
@@ -128,15 +128,15 @@ ZTEST(zsl_tests, test_prob_erf_inverse)
 
 	x = 0.0;
 	rc = zsl_prob_erf_inv(&x);
-	zassert_true(val_is_equal(rc, 0.0, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 0.75;
 	rc = zsl_prob_erf_inv(&x);
-	zassert_true(val_is_equal(rc, 0.81341985, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.81341985, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = -0.25;
 	rc = zsl_prob_erf_inv(&x);
-	zassert_true(val_is_equal(rc, -0.22531206, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, -0.22531206, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 1.0;
 	rc = zsl_prob_erf_inv(&x);
@@ -154,15 +154,15 @@ ZTEST(zsl_tests, test_prob_normal_cdf_inv)
 
 	x = 0.5;
 	rc = zsl_prob_normal_cdf_inv(&m, &s, &x);
-	zassert_true(val_is_equal(rc, 0.0, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 0.9772498680518208;
 	rc = zsl_prob_normal_cdf_inv(&m, &s, &x);
-	zassert_true(val_is_equal(rc, 2.0, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 2.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 1. - 0.9772498680518208;
 	rc = zsl_prob_normal_cdf_inv(&m, &s, &x);
-	zassert_true(val_is_equal(rc, -2.0, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, -2.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 0.0;
 	rc = zsl_prob_normal_cdf_inv(&m, &s, &x);
@@ -180,15 +180,15 @@ ZTEST(zsl_tests, test_prob_factorial)
 
 	n = 0;
 	rc = zsl_prob_factorial(&n);
-	zassert_true(val_is_equal(rc, 1, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 1, ZSL_CONSTANT(1E-6)), NULL);
 
 	n = 1;
 	rc = zsl_prob_factorial(&n);
-	zassert_true(val_is_equal(rc, 1, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 1, ZSL_CONSTANT(1E-6)), NULL);
 
 	n = 8;
 	rc = zsl_prob_factorial(&n);
-	zassert_true(val_is_equal(rc, 40320, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 40320, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_prob_binomial_coef)
@@ -199,38 +199,38 @@ ZTEST(zsl_tests, test_prob_binomial_coef)
 	k = 6;
 	rc = zsl_prob_binomial_coef(&n, &k, &c);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(c, 7, 1E-6), NULL);
+	zassert_true(val_is_equal(c, 7, ZSL_CONSTANT(1E-6)), NULL);
 
 	k = 4;
 	rc = zsl_prob_binomial_coef(&n, &k, &c);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(c, 35, 1E-6), NULL);
+	zassert_true(val_is_equal(c, 35, ZSL_CONSTANT(1E-6)), NULL);
 
 	k = 0;
 	rc = zsl_prob_binomial_coef(&n, &k, &c);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(c, 1, 1E-6), NULL);
+	zassert_true(val_is_equal(c, 1, ZSL_CONSTANT(1E-6)), NULL);
 
 	k = 1;
 	rc = zsl_prob_binomial_coef(&n, &k, &c);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(c, 7, 1E-6), NULL);
+	zassert_true(val_is_equal(c, 7, ZSL_CONSTANT(1E-6)), NULL);
 
 	k = -3;
 	rc = zsl_prob_binomial_coef(&n, &k, &c);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(c, 0, 1E-6), NULL);
+	zassert_true(val_is_equal(c, 0, ZSL_CONSTANT(1E-6)), NULL);
 
 	k = 9;
 	rc = zsl_prob_binomial_coef(&n, &k, &c);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(c, 0, 1E-6), NULL);
+	zassert_true(val_is_equal(c, 0, ZSL_CONSTANT(1E-6)), NULL);
 
 	n = 0;
 	k = 0;
 	rc = zsl_prob_binomial_coef(&n, &k, &c);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(c, 1, 1E-6), NULL);
+	zassert_true(val_is_equal(c, 1, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* n has to be positive. Negative n should return an error. */
 	n = -1;
@@ -246,19 +246,19 @@ ZTEST(zsl_tests, test_prob_binomial_pdf)
 
 	x = -3;
 	rc = zsl_prob_binomial_pdf(&n, &p, &x);
-	zassert_true(val_is_equal(rc, 0.0, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 0;
 	rc = zsl_prob_binomial_pdf(&n, &p, &x);
-	zassert_true(val_is_equal(rc, 0.16807, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.16807, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 4;
 	rc = zsl_prob_binomial_pdf(&n, &p, &x);
-	zassert_true(val_is_equal(rc, 0.02835, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.02835, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 7;
 	rc = zsl_prob_binomial_pdf(&n, &p, &x);
-	zassert_true(val_is_equal(rc, 0.0, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Errors. */
 	p = -0.1;
@@ -284,7 +284,7 @@ ZTEST(zsl_tests, test_prob_binomial_mean)
 
 	rc = zsl_prob_binomial_mean(&n, &p, &m);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(m, 1.5, 1E-6), NULL);
+	zassert_true(val_is_equal(m, 1.5, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Errors. */
 	p = -0.1;
@@ -309,7 +309,7 @@ ZTEST(zsl_tests, test_prob_binomial_variance)
 
 	rc = zsl_prob_binomial_var(&n, &p, &v);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(v, 1.05, 1E-6), NULL);
+	zassert_true(val_is_equal(v, 1.05, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Errors. */
 	p = -0.1;
@@ -334,19 +334,19 @@ ZTEST(zsl_tests, test_prob_binomial_cdf)
 
 	x = -3;
 	rc = zsl_prob_binomial_cdf(&n, &p, &x);
-	zassert_true(val_is_equal(rc, 0.0, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 0;
 	rc = zsl_prob_binomial_cdf(&n, &p, &x);
-	zassert_true(val_is_equal(rc, 0.16807, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.16807, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 4;
 	rc = zsl_prob_binomial_cdf(&n, &p, &x);
-	zassert_true(val_is_equal(rc, 0.99757, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 0.99757, ZSL_CONSTANT(1E-6)), NULL);
 
 	x = 7;
 	rc = zsl_prob_binomial_cdf(&n, &p, &x);
-	zassert_true(val_is_equal(rc, 1.0, 1E-6), NULL);
+	zassert_true(val_is_equal(rc, 1.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Errors. */
 	p = -0.1;
@@ -384,7 +384,7 @@ ZTEST(zsl_tests, test_prob_entropy)
 	/* Compute the entropy of va. */
 	rc = zsl_prob_entropy(&va, &h);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(h, 2.2037016960573483, 1E-6), NULL);
+	zassert_true(val_is_equal(h, 2.2037016960573483, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Compute the entropy of vb. It should return an error. */
 	rc = zsl_prob_entropy(&vb, &h);
@@ -405,7 +405,7 @@ ZTEST(zsl_tests, test_prob_bayes)
 	/* Calculate the probability of A given B (pab). */
 	rc = zsl_prob_bayes(&pa, &pb, &pba, &pab);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(pab, 0.3, 1E-6), NULL);
+	zassert_true(val_is_equal(pab, 0.3, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Case for negative and bigger than one probabilities. */
 	pa *= -1.;

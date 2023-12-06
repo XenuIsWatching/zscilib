@@ -19,14 +19,14 @@ ZTEST(zsl_tests, test_phy_dyn_newton)
  	rc = zsl_phy_dyn_newton(5.1, 4.2, &f);
  	zassert_true(rc == 0, NULL);
 #ifdef CONFIG_ZSL_SINGLE_PRECISION
- 	zassert_true(val_is_equal(f, 21.42, 1E-5), NULL);
+ 	zassert_true(val_is_equal(f, 21.42, ZSL_CONSTANT(1E-5)), NULL);
 #else
-	zassert_true(val_is_equal(f, 21.42, 1E-8), NULL);
+	zassert_true(val_is_equal(f, 21.42, ZSL_CONSTANT(1E-8)), NULL);
 #endif
 
 	rc = zsl_phy_dyn_newton(5.0, 4.0, &f);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(f, 20.0, 1E-8), NULL);
+	zassert_true(val_is_equal(f, 20.0, ZSL_CONSTANT(1E-8)), NULL);
 
 	/* Example for negative mass. */
 	rc = zsl_phy_dyn_newton(-5.1, 4.2, &f);
@@ -42,7 +42,7 @@ ZTEST(zsl_tests, test_phy_dyn_fric)
 
 	rc = zsl_phy_dyn_fric(3.3, 0.2, &f);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(f, 0.66, 1E-6), NULL);
+	zassert_true(val_is_equal(f, 0.66, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for mu less than zero. */
 	rc = zsl_phy_dyn_fric(3.3, -2.3, &f);
@@ -64,7 +64,7 @@ ZTEST(zsl_tests, test_phy_dyn_normal)
 
 	rc = zsl_phy_dyn_normal(51.3, 0.9, &n);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(n, 312.7314155880, 1E-6), NULL);
+	zassert_true(val_is_equal(n, 312.7314155880, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative mass. */
 	rc = zsl_phy_dyn_normal(-21.12, 1.1, &n);
@@ -80,7 +80,7 @@ ZTEST(zsl_tests, test_phy_dyn_pendul_period)
 
 	rc = zsl_phy_dyn_pendul_period(5.1, &t);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(t, 4.5310292812, 1E-6), NULL);
+	zassert_true(val_is_equal(t, 4.5310292812, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative length. */
 	rc = zsl_phy_dyn_pendul_period(-5.1, &t);
@@ -96,7 +96,7 @@ ZTEST(zsl_tests, test_phy_dyn_pendul_max_speed)
 
 	rc = zsl_phy_dyn_pendul_max_speed(5.1, 0.3, &vmax);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(vmax, 2.1137061105, 1E-6), NULL);
+	zassert_true(val_is_equal(vmax, 2.1137061105, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative length. */
 	rc = zsl_phy_dyn_pendul_max_speed(-5.1, 0.3, &vmax);
@@ -112,7 +112,7 @@ ZTEST(zsl_tests, test_phy_dyn_tension)
 
 	rc = zsl_phy_dyn_tension(15.0, 3.6, &t);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(t, 201.105, 1E-6), NULL);
+	zassert_true(val_is_equal(t, 201.105, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative mass. */
 	rc = zsl_phy_dyn_tension(-15.0, 3.6, &t);
@@ -128,7 +128,7 @@ ZTEST(zsl_tests, test_phy_dyn_lever)
 
 	rc = zsl_phy_dyn_lever(1.2, 44.0, 3.6, &f2);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(f2, 14.6666666666, 1E-6), NULL);
+	zassert_true(val_is_equal(f2, 14.6666666666, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative distance. */
 	rc = zsl_phy_dyn_lever(-1.2, 44.0, -3.6, &f2);

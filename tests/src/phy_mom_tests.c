@@ -18,7 +18,7 @@ ZTEST(zsl_tests, test_phy_mom_mom)
 
 	rc = zsl_phy_mom_mom(15.0, 5.31, &p);
 	zassert_true(rc == 0, NULL);
- 	zassert_true(val_is_equal(p, 79.65, 1E-6), NULL);
+ 	zassert_true(val_is_equal(p, 79.65, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative mass. */
 	rc = zsl_phy_mom_mom(-15.0, 5.31, &p);
@@ -34,7 +34,7 @@ ZTEST(zsl_tests, test_phy_mom_imp)
 
 	rc = zsl_phy_mom_imp(50.0, 3.0, &imp);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(imp, 150.0, 1E-6), NULL);
+	zassert_true(val_is_equal(imp, 150.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative time. */
 	rc = zsl_phy_mom_imp(50.0, -3.0, &imp);
@@ -50,7 +50,7 @@ ZTEST(zsl_tests, test_phy_mom_change)
 
 	rc = zsl_phy_mom_change(53.2, 15.0, 12.0, &p);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(p, -159.6, 1E-6), NULL);
+	zassert_true(val_is_equal(p, -159.6, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative mass. */
 	rc = zsl_phy_mom_change(-53.2, 15.0, 12.0, &p);
@@ -66,7 +66,7 @@ ZTEST(zsl_tests, test_phy_mom_elas)
 
 	rc = zsl_phy_mom_elas(13.1, 15.6, 9.6, 11.1, -4.3, &vf2);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(vf2, 2.7810810811, 1E-6), NULL);
+	zassert_true(val_is_equal(vf2, 2.7810810811, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative mass 'm1'. */
 	rc = zsl_phy_mom_elas(-13.1, 15.6, 9.6, 11.1, -4.3, &vf2);
@@ -94,7 +94,7 @@ ZTEST(zsl_tests, test_phy_mom_inelas)
 
 	rc = zsl_phy_mom_inelas(13.1, 15.6, 11.1, -4.3, &vf);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(vf, 6.4723140496, 1E-6), NULL);
+	zassert_true(val_is_equal(vf, 6.4723140496, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative mass 'm1'. */
 	rc = zsl_phy_mom_inelas(-13.1, 15.6, 11.1, -4.3, &vf);

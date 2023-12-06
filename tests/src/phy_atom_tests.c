@@ -18,7 +18,7 @@ ZTEST(zsl_tests, test_phy_atom_nucl_radius)
 
 	rc = zsl_phy_atom_nucl_radius(5, &r);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(r, 2.137469933, 1E-6), NULL);
+	zassert_true(val_is_equal(r, 2.137469933, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for zero mass number. */
 	rc = zsl_phy_atom_nucl_radius(0, &r);
@@ -34,7 +34,7 @@ ZTEST(zsl_tests, test_phy_atom_bohr_orb_radius)
 
 	rc = zsl_phy_atom_bohr_orb_radius(3, 5, &r);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(r, 0.4409810014, 1E-6), NULL);
+	zassert_true(val_is_equal(r, 0.4409810014, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for zero Z. */
 	rc = zsl_phy_atom_bohr_orb_radius(0, 5, &r);
@@ -50,7 +50,7 @@ ZTEST(zsl_tests, test_phy_atom_bohr_orb_vel)
 
 	rc = zsl_phy_atom_bohr_orb_vel(3, 5, &v);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(v, 1312.6147793774928, 1E-6), NULL);
+	zassert_true(val_is_equal(v, 1312.6147793774928, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for zero Z. */
 	rc = zsl_phy_atom_bohr_orb_vel(0, 5, &v);
@@ -66,7 +66,7 @@ ZTEST(zsl_tests, test_phy_atom_bohr_orb_ener)
 
 	rc = zsl_phy_atom_bohr_orb_ener(3.0, 5.0, &e);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(e, -4.8980496069, 1E-6), NULL);
+	zassert_true(val_is_equal(e, -4.8980496069, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for zero Z. */
 	rc = zsl_phy_atom_bohr_orb_ener(0, 5, &e);
@@ -80,9 +80,9 @@ ZTEST(zsl_tests, test_phy_atom_rad_decay)
 	int rc;
 	zsl_real_t qf;
 
-	rc = zsl_phy_atom_rad_decay(5.32E2, 3.1536E9, 8.0821918E-10, &qf);
+	rc = zsl_phy_atom_rad_decay(ZSL_CONSTANT(5.32E2), ZSL_CONSTANT(3.1536E9), ZSL_CONSTANT(8.0821918E-10), &qf);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(qf, 41.589323317, 1E-6), NULL);
+	zassert_true(val_is_equal(qf, 41.589323317, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative time. */
 	rc = zsl_phy_atom_rad_decay(10.0, -20.0, 3.0, &qf);
@@ -104,7 +104,7 @@ ZTEST(zsl_tests, test_phy_atom_bragg)
 
 	rc = zsl_phy_atom_bragg(3, 1.1, 500.0, &d);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(d, 841.5549889, 1E-6), NULL);
+	zassert_true(val_is_equal(d, 841.5549889, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative sin(theta). */
 	rc = zsl_phy_atom_bragg(3, 5.9, 500.0, &d);

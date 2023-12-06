@@ -10,7 +10,7 @@
 #include "zsl/matrices.h"
 #include "zsl/vectors.h"
 
-#define EPSILON 1e-4
+#define EPSILON ZSL_CONSTANT(1e-4)
 
 int svd_test()
 {

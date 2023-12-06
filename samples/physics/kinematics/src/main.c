@@ -58,7 +58,7 @@ void kinematics_demo(void)
 
 	zsl_phy_kin_ener(vel, m, &ke);
 
-	ke /= 1E3;
+	ke /= ZSL_CONSTANT(1E3);
 
 	printf("The velocity of the car is %f meters per second and\n", vel);
 	printf("its kinetic energy is %f joules right before braking.\n\n", ke);

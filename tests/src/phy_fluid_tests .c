@@ -18,7 +18,7 @@ ZTEST(zsl_tests, test_phy_fluid_dens)
 	
 	rc = zsl_phy_fluid_dens(53.0, 20.0, &d);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(d, 2.65, 1E-6), NULL);
+	zassert_true(val_is_equal(d, 2.65, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative mass. */
 	rc = zsl_phy_fluid_dens(-53.0, 20.0, &d);
@@ -46,7 +46,7 @@ ZTEST(zsl_tests, test_phy_fluid_simple_press)
 	
 	rc = zsl_phy_fluid_simple_press(53.0, 20.0, &p);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(p, 2.65, 1E-6), NULL);
+	zassert_true(val_is_equal(p, 2.65, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative force. */
 	rc = zsl_phy_fluid_simple_press(-53.0, 20.0, &p);
@@ -75,9 +75,9 @@ ZTEST(zsl_tests, test_phy_fluid_press)
 	rc = zsl_phy_fluid_press(10.3, 2.3, 997.0, &p);
 	zassert_true(rc == 0, NULL);
 #ifdef CONFIG_ZSL_SINGLE_PRECISION
- 	zassert_true(val_is_equal(p, 32.7884317, 1E-5), NULL);
+ 	zassert_true(val_is_equal(p, 32.7884317, ZSL_CONSTANT(1E-5)), NULL);
 #else
-	zassert_true(val_is_equal(p, 32.7884317, 1E-8), NULL);
+	zassert_true(val_is_equal(p, 32.7884317, ZSL_CONSTANT(1E-8)), NULL);
 #endif
 
 	/* Example for negative superficial pressure. */
@@ -106,7 +106,7 @@ ZTEST(zsl_tests, test_phy_fluid_bouyant_force)
 	
 	rc = zsl_phy_fluid_bouyant_force(1.3, 997.0, &f);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(f, 12.7108527, 1E-6), NULL);
+	zassert_true(val_is_equal(f, 12.7108527, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative volume. */
 	rc = zsl_phy_fluid_bouyant_force(-1.3, 997.0, &f);
@@ -128,7 +128,7 @@ ZTEST(zsl_tests, test_phy_fluid_flow_rate)
 	
 	rc = zsl_phy_fluid_flow_rate(0.5, 12.0, 0.25, &v2);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(v2, 24.0, 1E-6), NULL);
+	zassert_true(val_is_equal(v2, 24.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative 'a1'. */
 	rc = zsl_phy_fluid_flow_rate(-0.5, 12.0, 0.25, &v2);
@@ -162,7 +162,7 @@ ZTEST(zsl_tests, test_phy_fluid_force_prop)
 	
 	rc = zsl_phy_fluid_force_prop(0.5, 12.0, 0.25, &f2);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(f2, 6.0, 1E-6), NULL);
+	zassert_true(val_is_equal(f2, 6.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative 'a1'. */
 	rc = zsl_phy_fluid_force_prop(-0.5, 12.0, 0.25, &f2);
@@ -196,7 +196,7 @@ ZTEST(zsl_tests, test_phy_fluid_bernoulli)
 	
 	rc = zsl_phy_fluid_bernoulli(997.0, 12.0, 10.3, 10.0, &p2);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(p2, 32.234, 1E-6), NULL);
+	zassert_true(val_is_equal(p2, 32.234, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative density. */
 	rc = zsl_phy_fluid_bernoulli(-997.0, 12.0, 10.3, 10.0, &p2);
@@ -230,7 +230,7 @@ ZTEST(zsl_tests, test_phy_fluid_volume_flow_rate)
 	
 	rc = zsl_phy_fluid_volume_flow_rate(12.0, 0.25, &v);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(v, 3.0, 1E-6), NULL);
+	zassert_true(val_is_equal(v, 3.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative velocity. */
 	rc = zsl_phy_fluid_volume_flow_rate(-12.0, 0.25, &v);

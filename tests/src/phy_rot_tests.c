@@ -18,7 +18,7 @@ ZTEST(zsl_tests, test_phy_rot_angle)
 
 	rc = zsl_phy_rot_angle(1.1, 3.1, 0.6, &phi);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(phi, 6.293, 1E-6), NULL);
+	zassert_true(val_is_equal(phi, 6.293, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative time. */
 	rc = zsl_phy_rot_angle(1.1, -3.1, 0.6, &phi);
@@ -34,7 +34,7 @@ ZTEST(zsl_tests, test_phy_rot_dist)
 
 	rc = zsl_phy_rot_dist(1.1, 6.0, &dist);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(dist, 6.6, 1E-6), NULL);
+	zassert_true(val_is_equal(dist, 6.6, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative radius. */
 	rc = zsl_phy_rot_dist(1.1, -6.0, &dist);
@@ -50,7 +50,7 @@ ZTEST(zsl_tests, test_phy_rot_turn)
 
 	rc = zsl_phy_rot_turn(1.1, &turn);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(turn, 0.1750704374, 1E-6), NULL);
+	zassert_true(val_is_equal(turn, 0.1750704374, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_phy_rot_time)
@@ -60,12 +60,12 @@ ZTEST(zsl_tests, test_phy_rot_time)
 
 	rc = zsl_phy_rot_time(3.1, 5.7, 2.0, &time);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(time, 1.3, 1E-6), NULL);
+	zassert_true(val_is_equal(time, 1.3, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for negative angular acceleration. */
 	rc = zsl_phy_rot_time(4.1, 3.1, -2.0, &time);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(time, 0.5, 1E-6), NULL);
+	zassert_true(val_is_equal(time, 0.5, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero angular acceleration. */
 	rc = zsl_phy_rot_time(4.1, 3.1, 0.0, &time);
@@ -87,7 +87,7 @@ ZTEST(zsl_tests, test_phy_rot_omega)
 
 	rc = zsl_phy_rot_omega(3.0, 5.0, 2.5, &of);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(of, 15.5, 1E-6), NULL);
+	zassert_true(val_is_equal(of, 15.5, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for negative time. */
 	rc = zsl_phy_rot_omega(3.0, -5.0, 2.5, &of);
@@ -103,7 +103,7 @@ ZTEST(zsl_tests, test_phy_rot_omega2)
 
 	rc = zsl_phy_rot_omega2(3.0, 5.0, 2.5, &of);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(of, 5.8309518948, 1E-6), NULL);
+	zassert_true(val_is_equal(of, 5.8309518948, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for complex final angular velocity. */
 	rc = zsl_phy_rot_omega2(3.0, 5.0, -2.5, &of);
@@ -119,7 +119,7 @@ ZTEST(zsl_tests, test_phy_rot_av_omega)
 
 	rc = zsl_phy_rot_av_omega(1.0, 2.0, &omega);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(omega, 0.5, 1E-6), NULL);
+	zassert_true(val_is_equal(omega, 0.5, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero time. */
 	rc = zsl_phy_rot_av_omega(1.0, 0.0, &omega);
@@ -141,7 +141,7 @@ ZTEST(zsl_tests, test_phy_rot_vel)
 
 	rc = zsl_phy_rot_vel(3.2, 6.0, &vel);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(vel, 19.2, 1E-6), NULL);
+	zassert_true(val_is_equal(vel, 19.2, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative radius. */
 	rc = zsl_phy_rot_vel(3.2, -6.0, &vel);
@@ -157,12 +157,12 @@ ZTEST(zsl_tests, test_phy_rot_ang_accel)
 
 	rc = zsl_phy_rot_ang_accel(1.0, 2.0, 4.0, &a);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(a, 0.25, 1E-6), NULL);
+	zassert_true(val_is_equal(a, 0.25, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for negative angular acceleration. */
 	rc = zsl_phy_rot_ang_accel(4.5, 2.1, 1.2, &a);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(a, -2.0, 1E-6), NULL);
+	zassert_true(val_is_equal(a, -2.0, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero time. */
 	rc = zsl_phy_rot_ang_accel(1.0, 2.0, 0.0, &a);
@@ -184,7 +184,7 @@ ZTEST(zsl_tests, test_phy_rot_accel)
 
 	rc = zsl_phy_rot_accel(1.5, 6.0, &accel);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(accel, 9.0, 1E-6), NULL);
+	zassert_true(val_is_equal(accel, 9.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative radius. */
 	rc = zsl_phy_rot_accel(1.5, -6.0, &accel);
@@ -201,15 +201,15 @@ ZTEST(zsl_tests, test_phy_rot_ener)
 	rc = zsl_phy_rot_ener(6.2, 4.1, &rke);
 	zassert_true(rc == 0, NULL);
 #ifdef CONFIG_ZSL_SINGLE_PRECISION
- 	zassert_true(val_is_equal(rke, 78.802, 1E-5), NULL);
+ 	zassert_true(val_is_equal(rke, 78.802, ZSL_CONSTANT(1E-5)), NULL);
 #else
-        zassert_true(val_is_equal(rke, 78.802, 1E-8), NULL);
+        zassert_true(val_is_equal(rke, 78.802, ZSL_CONSTANT(1E-8)), NULL);
 #endif
 	
 	/* Example for zero moment of inertia. */
 	rc = zsl_phy_rot_ener(6.2, 0.0, &rke);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(rke, 0.0, 1E-6), NULL);
+	zassert_true(val_is_equal(rke, 0.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative moment of inertia. */
 	rc = zsl_phy_rot_ener(6.2, -4.1, &rke);
@@ -225,7 +225,7 @@ ZTEST(zsl_tests, test_phy_rot_period)
 
 	rc = zsl_phy_rot_period(6.2, &t);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(t, 1.0134169850, 1E-6), NULL);
+	zassert_true(val_is_equal(t, 1.0134169850, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero angular velocity. */
 	rc = zsl_phy_rot_period(0.0, &t);
@@ -247,12 +247,12 @@ ZTEST(zsl_tests, test_phy_rot_frequency)
 
 	rc = zsl_phy_rot_frequency(6.2, &f);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(f, 0.9867606472, 1E-6), NULL);
+	zassert_true(val_is_equal(f, 0.9867606472, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero angular velocity. */
 	rc = zsl_phy_rot_frequency(0.0, &f);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(f, 0.0, 1E-6), NULL);
+	zassert_true(val_is_equal(f, 0.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative angular velocity. */
 	rc = zsl_phy_rot_frequency(-6.2, &f);
@@ -268,12 +268,12 @@ ZTEST(zsl_tests, test_phy_rot_cent_accel)
 
 	rc = zsl_phy_rot_cent_accel(6.1, 4.2, &ca);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(ca, 8.8595238095, 1E-6), NULL);
+	zassert_true(val_is_equal(ca, 8.8595238095, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero tangencial velocity. */
 	rc = zsl_phy_rot_cent_accel(0.0, 4.2, &ca);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(ca, 0.0, 1E-6), NULL);
+	zassert_true(val_is_equal(ca, 0.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for zero radius. */
 	rc = zsl_phy_rot_cent_accel(6.1, 0.0, &ca);
@@ -296,15 +296,15 @@ ZTEST(zsl_tests, test_phy_rot_cent_accel2)
 	rc = zsl_phy_rot_cent_accel2(1.2, 4.2, &ca);
 	zassert_true(rc == 0, NULL);
 #ifdef CONFIG_ZSL_SINGLE_PRECISION
- 	zassert_true(val_is_equal(ca, 115.1453846794, 1E-5), NULL);
+ 	zassert_true(val_is_equal(ca, 115.1453846794, ZSL_CONSTANT(1E-5)), NULL);
 #else
-        zassert_true(val_is_equal(ca, 115.1453846794, 1E-8), NULL);
+        zassert_true(val_is_equal(ca, 115.1453846794, ZSL_CONSTANT(1E-8)), NULL);
 #endif
 	
 	/* Example for zero radius. */
 	rc = zsl_phy_rot_cent_accel2(1.2, 0.0, &ca);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(ca, 0.0, 1E-6), NULL);
+	zassert_true(val_is_equal(ca, 0.0, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for negative radius. */
 	rc = zsl_phy_rot_cent_accel2(1.2, -4.2, &ca);
@@ -332,22 +332,22 @@ ZTEST(zsl_tests, test_phy_rot_total_accel)
 
 	rc = zsl_phy_rot_total_accel(3.8, 5.5, &at);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(at, 6.6850579653, 1E-6), NULL);
+	zassert_true(val_is_equal(at, 6.6850579653, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for negative accelerations. */
 	rc = zsl_phy_rot_total_accel(-3.8, -5.5, &at);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(at, 6.6850579653, 1E-6), NULL);
+	zassert_true(val_is_equal(at, 6.6850579653, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero tangencial acceleration. */
 	rc = zsl_phy_rot_total_accel(0.0, 5.5, &at);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(at, 5.5, 1E-6), NULL);
+	zassert_true(val_is_equal(at, 5.5, ZSL_CONSTANT(1E-6)), NULL);
 	
 	/* Example for zero centripetal acceleration. */
 	rc = zsl_phy_rot_total_accel(3.8, 0.0, &at);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(at, 3.8, 1E-6), NULL);
+	zassert_true(val_is_equal(at, 3.8, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_phy_rot_power)
@@ -357,5 +357,5 @@ ZTEST(zsl_tests, test_phy_rot_power)
 
 	rc = zsl_phy_rot_power(6.7, 5.1, &power);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(power, 34.17, 1E-6), NULL);
+	zassert_true(val_is_equal(power, 34.17, ZSL_CONSTANT(1E-6)), NULL);
 }

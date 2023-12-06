@@ -37,9 +37,9 @@ ZTEST(zsl_tests, test_fus_cal_rot_mtx)
 	/* Rotate the vector v using the matrix m. */
 	rc = zsl_fus_cal_rot_mtx(&v, &m, &w);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(w.data[0], -1.222222, 1E-6), NULL);
-	zassert_true(val_is_equal(w.data[1], 2.555556, 1E-6), NULL);
-	zassert_true(val_is_equal(w.data[2], 2.444444, 1E-6), NULL);
+	zassert_true(val_is_equal(w.data[0], -1.222222, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(w.data[1], 2.555556, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(w.data[2], 2.444444, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Special cases where inputs are invalid. */
 	rc = zsl_fus_cal_rot_mtx(&v2, &m, &w);
@@ -77,9 +77,9 @@ ZTEST(zsl_tests, test_fus_cal_rot_axis_angle)
 	/* Rotate the vector v using the axis a and angle b. */
 	rc = zsl_fus_cal_rot_axis_angle(&v, &a, &b, &w);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(w.data[0], -2.913558, 1E-6), NULL);
-	zassert_true(val_is_equal(w.data[1], 1.365200, 1E-6), NULL);
-	zassert_true(val_is_equal(w.data[2], -1.909819, 1E-6), NULL);
+	zassert_true(val_is_equal(w.data[0], -2.913558, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(w.data[1], 1.365200, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(w.data[2], -1.909819, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Special cases where inputs are invalid. */
 	rc = zsl_fus_cal_rot_axis_angle(&v2, &a, &b, &w);
@@ -128,19 +128,19 @@ ZTEST(zsl_tests_double, test_fus_cal_magn)
 	/* Compute the ellipsoid fitting. */
 	rc = zsl_fus_cal_magn(&m, &l, &mu, &K, &b);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(K.data[0], 0.600621, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[1], -0.610451, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[2], -0.318351, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[3], -0.610451, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[4], 1.968980, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[5], 0.152699, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[6], -0.318351, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[7], 0.152699, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[8], 2.868776, 1E-6), NULL);
+	zassert_true(val_is_equal(K.data[0], 0.600621, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[1], -0.610451, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[2], -0.318351, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[3], -0.610451, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[4], 1.968980, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[5], 0.152699, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[6], -0.318351, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[7], 0.152699, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[8], 2.868776, ZSL_CONSTANT(1E-6)), NULL);
 
-	zassert_true(val_is_equal(b.data[0], -1.211677, 1E-6), NULL);
-	zassert_true(val_is_equal(b.data[1], -1.842987, 1E-6), NULL);
-	zassert_true(val_is_equal(b.data[2], 0.087542, 1E-6), NULL);
+	zassert_true(val_is_equal(b.data[0], -1.211677, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(b.data[1], -1.842987, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(b.data[2], 0.087542, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Special cases where inputs are invalid. */
 	rc = zsl_fus_cal_magn(&m2, &l, &mu, &K, &b);
@@ -193,19 +193,19 @@ ZTEST(zsl_tests_double, test_fus_cal_magn_fast)
 	/* Compute the magnetometer data fitting. */
 	rc = zsl_fus_cal_magn_fast(&m, &me, &K, &b);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(K.data[0], 5.685746, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[1], 0.091864, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[2], 0.870620, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[3], 0.000000, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[4], 6.375517, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[5], -0.588939, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[6], 0.000000, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[7], 0.000000, 1E-6), NULL);
-	zassert_true(val_is_equal(K.data[8], 2.783505, 1E-6), NULL);
+	zassert_true(val_is_equal(K.data[0], 5.685746, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[1], 0.091864, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[2], 0.870620, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[3], 0.000000, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[4], 6.375517, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[5], -0.588939, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[6], 0.000000, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[7], 0.000000, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(K.data[8], 2.783505, ZSL_CONSTANT(1E-6)), NULL);
 
-	zassert_true(val_is_equal(b.data[0], 1.088338, 1E-6), NULL);
-	zassert_true(val_is_equal(b.data[1], -0.900774, 1E-6), NULL);
-	zassert_true(val_is_equal(b.data[2], -7.088266, 1E-6), NULL);
+	zassert_true(val_is_equal(b.data[0], 1.088338, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(b.data[1], -0.900774, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(b.data[2], -7.088266, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Special cases where inputs are invalid. */
 	rc = zsl_fus_cal_magn_fast(&m2, &me, &K, &b);
@@ -233,7 +233,7 @@ ZTEST(zsl_tests, test_fus_cal_corr_scalar)
 
 	/* Apply the correction. */
 	rc = zsl_fus_cal_corr_scalar(&d, &k, &b, &d_out);
-	zassert_true(val_is_equal(d_out, 5.88, 1E-6), NULL);
+	zassert_true(val_is_equal(d_out, 5.88, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_fus_cal_corr_vec)
@@ -270,9 +270,9 @@ ZTEST(zsl_tests, test_fus_cal_corr_vec)
 	/* Correct the magnetometer data. */
 	rc = zsl_fus_cal_corr_vec(&v, &K, &b, &v_out);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(v_out.data[0], 1.647000, 1E-6), NULL);
-	zassert_true(val_is_equal(v_out.data[1], -1.980000, 1E-6), NULL);
-	zassert_true(val_is_equal(v_out.data[2], 9.899000, 1E-6), NULL);
+	zassert_true(val_is_equal(v_out.data[0], 1.647000, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(v_out.data[1], -1.980000, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(v_out.data[2], 9.899000, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Special cases where inputs are invalid. */
 	rc = zsl_fus_cal_corr_vec(&v2, &K, &b, &v_out);
@@ -359,8 +359,8 @@ ZTEST(zsl_tests, test_fus_cal_madg)
 	/* Calculate the value of beta. */
 	rc = zsl_fus_cal_madg(&g, &a, &m, 100.0, NULL, &beta);
 	zassert_true(rc == 0, NULL);
-	//zassert_true(val_is_equal(beta, 0.999, 1E-6), NULL);
-	zassert_true(val_is_equal(beta, 0.0, 1E-6), NULL);
+	//zassert_true(val_is_equal(beta, 0.999, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(beta, 0.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Special cases where inputs are invalid. */
 	rc = zsl_fus_cal_madg(&g, &a, &m, -100.0, NULL, &beta);
@@ -451,8 +451,8 @@ ZTEST(zsl_tests, test_fus_cal_mahn)
 	/* Calculate the value of kp. */
 	rc = zsl_fus_cal_mahn(&g, &a, &m, 100.0, NULL, &kp);
 	zassert_true(rc == 0, NULL);
-	//zassert_true(val_is_equal(kp, 0.999, 1E-6), NULL);
-	zassert_true(val_is_equal(kp, 0.0, 1E-6), NULL);
+	//zassert_true(val_is_equal(kp, 0.999, ZSL_CONSTANT(1E-6)), NULL);
+	zassert_true(val_is_equal(kp, 0.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Special cases where inputs are invalid. */
 	rc = zsl_fus_cal_mahn(&g, &a, &m, -100.0, NULL, &kp);

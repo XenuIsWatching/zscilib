@@ -18,7 +18,7 @@ ZTEST(zsl_tests, test_phy_magn_force)
 
 	rc = zsl_phy_magn_force(1.5, 50.0, 4.3, 1.1, &f);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(f, 287.4143736198, 1E-6), NULL);
+	zassert_true(val_is_equal(f, 287.4143736198, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative velocity. */
 	rc = zsl_phy_magn_force(1.5, -50.0, 4.3, 1.1, &f);
@@ -40,7 +40,7 @@ ZTEST(zsl_tests, test_phy_magn_force_wire)
 
 	rc = zsl_phy_magn_force_wire(1.5, 1.0, 4.3, 1.1, &f);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(f, 5.7482874724, 1E-6), NULL);
+	zassert_true(val_is_equal(f, 5.7482874724, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative longitude. */
 	rc = zsl_phy_magn_force_wire(1.5, -1.0, 4.3, 1.1, &f);
@@ -63,9 +63,9 @@ ZTEST(zsl_tests, test_phy_magn_torque_loop)
 	rc = zsl_phy_magn_torque_loop(1.5, 10.0, 4.3, 1.1, &tor);
 	zassert_true(rc == 0, NULL);
 #ifdef CONFIG_ZSL_SINGLE_PRECISION
-	zassert_true(val_is_equal(tor, 57.482874724, 1E-5), NULL);
+	zassert_true(val_is_equal(tor, 57.482874724, ZSL_CONSTANT(1E-5)), NULL);
 #else
-	zassert_true(val_is_equal(tor, 57.482874724, 1E-8), NULL);
+	zassert_true(val_is_equal(tor, 57.482874724, ZSL_CONSTANT(1E-8)), NULL);
 #endif
 
 	/* Example for negative area. */
@@ -88,7 +88,7 @@ ZTEST(zsl_tests, test_phy_magn_pot_dipole)
 
 	rc = zsl_phy_magn_pot_dipole(21.3, 4.3, 1.1, &u);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(u, -41.5448687614, 1E-6), NULL);
+	zassert_true(val_is_equal(u, -41.5448687614, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative magnetic momentum. */
 	rc = zsl_phy_magn_pot_dipole(-21.3, 4.3, 1.1, &u);
@@ -110,7 +110,7 @@ ZTEST(zsl_tests, test_phy_magn_orb_radius)
 
 	rc = zsl_phy_magn_orb_radius(1.6, 13.9, 4.0, 5.6, &r);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(r, 12.1625, 1E-6), NULL);
+	zassert_true(val_is_equal(r, 12.1625, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative mass. */
 	rc = zsl_phy_magn_orb_radius(1.6, 13.9, 4.0, -5.6, &r);
@@ -144,7 +144,7 @@ ZTEST(zsl_tests, test_phy_magn_flux)
 
 	rc = zsl_phy_magn_flux(10.25, 4.3, 1.1, &fl);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(fl, 19.9922490518, 1E-6), NULL);
+	zassert_true(val_is_equal(fl, 19.9922490518, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative area. */
 	rc = zsl_phy_magn_flux(-10.25, 4.3, 1.1, &fl);
@@ -167,9 +167,9 @@ ZTEST(zsl_tests, test_phy_magn_mom)
 	rc = zsl_phy_magn_mom(1.7, 10.25, &mom);
 	zassert_true(rc == 0, NULL);
 #ifdef CONFIG_ZSL_SINGLE_PRECISION
-	zassert_true(val_is_equal(mom, 17.425, 1E-5), NULL);
+	zassert_true(val_is_equal(mom, 17.425, ZSL_CONSTANT(1E-5)), NULL);
 #else
-	zassert_true(val_is_equal(mom, 17.425, 1E-8), NULL);
+	zassert_true(val_is_equal(mom, 17.425, ZSL_CONSTANT(1E-8)), NULL);
 #endif
 
 	/* Example for negative area. */

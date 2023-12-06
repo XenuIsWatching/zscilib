@@ -19,7 +19,7 @@ ZTEST(zsl_tests, test_phy_elcty_current)
 
 	rc = zsl_phy_elcty_current(15.0, 10.0, &i);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(i, 1.5, 1E-6), NULL);
+	zassert_true(val_is_equal(i, 1.5, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative time. */
 	rc = zsl_phy_elcty_current(15.0, -10.0, &i);
@@ -47,7 +47,7 @@ ZTEST(zsl_tests, test_phy_elcty_res_series)
 
 	rc = zsl_phy_elcty_res_series(&va, &r);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(r, 11.2, 1E-6), NULL);
+	zassert_true(val_is_equal(r, 11.2, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for a negative resistance. */
 	rc = zsl_phy_elcty_res_series(&vb, &r);
@@ -75,7 +75,7 @@ ZTEST(zsl_tests, test_phy_elcty_res_parallel)
 
 	rc = zsl_phy_elcty_res_parallel(&va, &r);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(r, 0.25236593059, 1E-6), NULL);
+	zassert_true(val_is_equal(r, 0.25236593059, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for a negative resistance. */
 	rc = zsl_phy_elcty_res_parallel(&vb, &r);
@@ -103,7 +103,7 @@ ZTEST(zsl_tests, test_phy_elcty_cap_series)
 
 	rc = zsl_phy_elcty_cap_series(&va, &c);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(c, 0.25986078886, 1E-6), NULL);
+	zassert_true(val_is_equal(c, 0.25986078886, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for a negative capacitance. */
 	rc = zsl_phy_elcty_cap_series(&vb, &c);
@@ -131,7 +131,7 @@ ZTEST(zsl_tests, test_phy_elcty_cap_parallel)
 
 	rc = zsl_phy_elcty_cap_parallel(&va, &c);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(c, 12.2, 1E-6), NULL);
+	zassert_true(val_is_equal(c, 12.2, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for a negative capacitance. */
 	rc = zsl_phy_elcty_cap_parallel(&vb, &c);
@@ -147,7 +147,7 @@ ZTEST(zsl_tests, test_phy_elcty_resistivity)
 
 	rc = zsl_phy_elcty_resistivity(250.0, 0.025, 0.001, &rty);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(rty, 6250.0, 1E-6), NULL);
+	zassert_true(val_is_equal(rty, 6250.0, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative resistance. */
 	rc = zsl_phy_elcty_resistivity(-250.0, 0.025, 0.001, &rty);
@@ -175,7 +175,7 @@ ZTEST(zsl_tests, test_phy_elcty_ohm_law)
 
 	rc = zsl_phy_elcty_ohm_law(0.025, 250.0, &v);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(v, 6.25, 1E-6), NULL);
+	zassert_true(val_is_equal(v, 6.25, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative resistance. */
 	rc = zsl_phy_elcty_ohm_law(0.025, -250.0, &v);
@@ -191,7 +191,7 @@ ZTEST(zsl_tests, test_phy_elcty_power_vi)
 
 	rc = zsl_phy_elcty_power_vi(1.5, 0.025, &p);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(p, 0.0375, 1E-6), NULL);
+	zassert_true(val_is_equal(p, 0.0375, ZSL_CONSTANT(1E-6)), NULL);
 }
 
 ZTEST(zsl_tests, test_phy_elcty_power_ir)
@@ -201,7 +201,7 @@ ZTEST(zsl_tests, test_phy_elcty_power_ir)
 
 	rc = zsl_phy_elcty_power_ir(0.025, 250.0, &p);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(p, 0.15625, 1E-6), NULL);
+	zassert_true(val_is_equal(p, 0.15625, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative resistance. */
 	rc = zsl_phy_elcty_power_ir(0.025, -250.0, &p);
@@ -217,7 +217,7 @@ ZTEST(zsl_tests, test_phy_elcty_power_vr)
 
 	rc = zsl_phy_elcty_power_vr(1.5, 250.0, &p);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(p, 0.009, 1E-6), NULL);
+	zassert_true(val_is_equal(p, 0.009, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative resistance. */
 	rc = zsl_phy_elcty_power_vr(1.5, -250.0, &p);

@@ -17,7 +17,7 @@ zsl_phy_photon_ener(zsl_real_t lambda, zsl_real_t *e)
 		return -EINVAL;
 	}
 
-	*e = (ZSL_LIGHT_SPEED * ZSL_PLANCK) / (lambda * 1.602176634E-19);
+	*e = (ZSL_LIGHT_SPEED * ZSL_PLANCK) / (lambda * ZSL_CONSTANT(1.602176634E-19));
 
 	return 0;
 }
@@ -30,7 +30,7 @@ zsl_phy_photon_mom(zsl_real_t lambda, zsl_real_t *p)
 		return -EINVAL;
 	}
 
-	*p = ZSL_PLANCK / (lambda * 1.602176634E-19);
+	*p = ZSL_PLANCK / (lambda * ZSL_CONSTANT(1.602176634E-19));
 
 	return 0;
 }
@@ -69,7 +69,7 @@ zsl_phy_photon_photoelectric(zsl_real_t f, zsl_real_t w, zsl_real_t *kmax)
 		return -EINVAL;
 	}
 
-	*kmax = ((ZSL_PLANCK * f) / 1.602176634E-19) - w;
+	*kmax = ((ZSL_PLANCK * f) / ZSL_CONSTANT(1.602176634E-19)) - w;
 
 	return 0;
 }

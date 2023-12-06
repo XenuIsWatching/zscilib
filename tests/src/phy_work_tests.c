@@ -18,7 +18,7 @@ ZTEST(zsl_tests, test_phy_work_module)
 
 	rc = zsl_phy_work_module(54.2, 3.0, &w);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(w, 162.6, 1E-6), NULL);
+	zassert_true(val_is_equal(w, 162.6, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative force. */
 	rc = zsl_phy_work_module(-54.2, 3.0, &w);
@@ -41,9 +41,9 @@ ZTEST(zsl_tests, test_phy_work_x)
 	rc = zsl_phy_work_x(54.2, 3.0, 0.4, &w);
 	zassert_true(rc == 0, NULL);
 #ifdef CONFIG_ZSL_SINGLE_PRECISION
- 	zassert_true(val_is_equal(w, 149.7645176249, 1E-4), NULL);
+ 	zassert_true(val_is_equal(w, 149.7645176249, ZSL_CONSTANT(1E-4)), NULL);
 #else
-	zassert_true(val_is_equal(w, 149.7645176249, 1E-8), NULL);
+	zassert_true(val_is_equal(w, 149.7645176249, ZSL_CONSTANT(1E-8)), NULL);
 #endif
 
 	/* Example for negative force. */
@@ -66,7 +66,7 @@ ZTEST(zsl_tests, test_phy_work_y)
 
 	rc = zsl_phy_work_y(54.2, 3.0, 0.4, &w);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(w, 63.3194224594, 1E-6), NULL);
+	zassert_true(val_is_equal(w, 63.3194224594, ZSL_CONSTANT(1E-6)), NULL);
 
 	/* Example for negative force. */
 	rc = zsl_phy_work_y(-54.2, 3.0, 0.4, &w);
@@ -88,5 +88,5 @@ ZTEST(zsl_tests, test_phy_work_kin)
 
 	rc = zsl_phy_work_kin(14.0, 35.0, &w);
 	zassert_true(rc == 0, NULL);
-	zassert_true(val_is_equal(w, 21.0, 1E-6), NULL);
+	zassert_true(val_is_equal(w, 21.0, ZSL_CONSTANT(1E-6)), NULL);
 }

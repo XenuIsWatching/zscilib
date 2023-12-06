@@ -64,7 +64,7 @@ int zsl_quat_to_unit(struct zsl_quat *q, struct zsl_quat *qn)
 	int rc = 0;
 	zsl_real_t m = zsl_quat_magn(q);
 
-	if (ZSL_ABS(m) < 1E-6) {
+	if (ZSL_ABS(m) < ZSL_CONSTANT(1E-6)) {
 		qn->r = 0.0;
 		qn->i = 0.0;
 		qn->j = 0.0;
@@ -95,7 +95,7 @@ bool zsl_quat_is_unit(struct zsl_quat *q)
 		q->j * q->j +
 		q->k * q->k);
 
-	return zsl_quat_val_is_equal(unit_len, 1.0, 1E-6);
+	return zsl_quat_val_is_equal(unit_len, 1.0, ZSL_CONSTANT(1E-6));
 }
 
 int zsl_quat_scale(struct zsl_quat *q, zsl_real_t s, struct zsl_quat *qs)
@@ -248,7 +248,7 @@ int zsl_quat_inv(struct zsl_quat *q, struct zsl_quat *qi)
 	int rc = 0;
 	zsl_real_t m = zsl_quat_magn(q);
 
-	if (ZSL_ABS(m) < 1E-6) {
+	if (ZSL_ABS(m) < ZSL_CONSTANT(1E-6)) {
 		/* Set to all 0's. */
 		zsl_quat_init(qi, ZSL_QUAT_TYPE_EMPTY);
 	} else {
@@ -291,7 +291,7 @@ int zsl_quat_rot(struct zsl_quat *qa, struct zsl_quat *qb, struct zsl_quat *qr)
 	int rc = 0;
 
 #if CONFIG_ZSL_BOUNDS_CHECKS
-	if (ZSL_ABS(qb->r) > 1E-6) {
+	if (ZSL_ABS(qb->r) > ZSL_CONSTANT(1E-6)) {
 		rc = -EINVAL;
 		goto err;
 	}
@@ -405,7 +405,7 @@ int zsl_quat_slerp(struct zsl_quat *qa, struct zsl_quat *qb,
 
 	/* The value dot is always between -1 and 1. If dot = 1.0, qa = qb and there
 	 * is no interpolation. */
-	if (ZSL_ABS(dot - 1.0) < 1E-6) {
+	if (ZSL_ABS(dot - 1.0) < ZSL_CONSTANT(1E-6)) {
 		qi->r = qa_u.r;
 		qi->i = qa_u.i;
 		qi->j = qa_u.j;
@@ -414,7 +414,7 @@ int zsl_quat_slerp(struct zsl_quat *qa, struct zsl_quat *qb,
 	}
 
 	/* If dot = -1, then qa = - qb and the interpolation is invald. */
-	if (ZSL_ABS(dot + 1.0) < 1E-6) {
+	if (ZSL_ABS(dot + 1.0) < ZSL_CONSTANT(1E-6)) {
 		rc = -EINVAL;
 		goto err;
 	}
@@ -527,7 +527,7 @@ int zsl_quat_to_euler(struct zsl_quat *q, struct zsl_euler *e)
 	e->y = ZSL_ASIN(v);
 
 	/* Gimbal lock case. */
-	if (ZSL_ABS(gl - 0.5) < 1E-6 || ZSL_ABS(gl + 0.5) < 1E-6) {
+	if (ZSL_ABS(gl - 0.5) < ZSL_CONSTANT(1E-6) || ZSL_ABS(gl + 0.5) < ZSL_CONSTANT(1E-6)) {
 		e->x = ZSL_ATAN2(2.0 * (qn.j * qn.k + qn.i * qn.r),
 				 1.0 - 2.0 * (qn.i * qn.i + qn.k * qn.k));
 		e->z = 0.0;
@@ -614,17 +614,17 @@ int zsl_quat_from_rot_mtx(struct zsl_mtx *m, struct zsl_quat *q)
 	q->j = 0.5 * ZSL_SQRT(-m->data[0] + m->data[4] - m->data[8] + 1.0);
 	q->k = 0.5 * ZSL_SQRT(-m->data[0] - m->data[4] + m->data[8] + 1.0);
 
-	if (ZSL_ABS(m->data[7] - m->data[5]) > 1E-6) {
+	if (ZSL_ABS(m->data[7] - m->data[5]) > ZSL_CONSTANT(1E-6)) {
 		/* Multiply by the sign of m21 - m12. */
 		q->i *= (m->data[7] - m->data[5]) / ZSL_ABS(m->data[7] - m->data[5]);
 	}
 
-	if (ZSL_ABS(m->data[2] - m->data[6]) > 1E-6) {
+	if (ZSL_ABS(m->data[2] - m->data[6]) > ZSL_CONSTANT(1E-6)) {
 		/* Multiply by the sign of m02 - m20. */
 		q->j *= (m->data[2] - m->data[6]) / ZSL_ABS(m->data[2] - m->data[6]);
 	}
 
-	if (ZSL_ABS(m->data[3] - m->data[1]) > 1E-6) {
+	if (ZSL_ABS(m->data[3] - m->data[1]) > ZSL_CONSTANT(1E-6)) {
 		/* Multiply by the sign of m10 - m01. */
 		q->k *= (m->data[3] - m->data[1]) / ZSL_ABS(m->data[3] - m->data[1]);
 	}
@@ -651,7 +651,7 @@ int zsl_quat_to_axis_angle(struct zsl_quat *q, struct zsl_vec *a,
 	struct zsl_quat qn;
 	zsl_quat_to_unit(q, &qn);
 
-	if (ZSL_ABS(qn.r - 1.0) < 1E-6) {
+	if (ZSL_ABS(qn.r - 1.0) < ZSL_CONSTANT(1E-6)) {
 		a->data[0] = 0.0;
 		a->data[1] = 0.0;
 		a->data[2] = 0.0;
@@ -688,7 +688,7 @@ int zsl_quat_from_axis_angle(struct zsl_vec *a, zsl_real_t *b,
 				   a->data[1] * a->data[1] +
 				   a->data[2] * a->data[2]);
 
-	if (norm < 1E-6) {
+	if (norm < ZSL_CONSTANT(1E-6)) {
 		q->r = 0.0;
 		q->i = 0.0;
 		q->j = 0.0;

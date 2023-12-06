@@ -21,67 +21,67 @@
  */
 static const zsl_real_t zsl_clr_conv_xyy_cct_ohno_2011_data[7][7] = {
 	/** kiO..ki6[0] */
-	{ -1.77348E-01,
-	  1.115559E+00,
-	  -1.5008606E+00,
-	  9.750013E-01,
-	  -3.307009E-01,
-	  5.6061400E-02,
-	  -3.7146000E-03 },
+	{ ZSL_CONSTANT(-1.77348E-01),
+	  ZSL_CONSTANT(1.115559E+00),
+	  ZSL_CONSTANT(-1.5008606E+00),
+	  ZSL_CONSTANT(9.750013E-01),
+	  ZSL_CONSTANT(-3.307009E-01),
+	  ZSL_CONSTANT(5.6061400E-02),
+	  ZSL_CONSTANT(-3.7146000E-03) },
 
 	/** ki0..ki6[1] */
-	{  5.308409E-04,
-	   2.1595434E-03,
-	   -4.3534788E-03,
-	   3.6196568E-03,
-	   -1.589747E-03,
-	   3.5700160E-04,
-	   -3.2325500E-05 },
+	{  ZSL_CONSTANT(5.308409E-04),
+	   ZSL_CONSTANT(2.1595434E-03),
+	   ZSL_CONSTANT(-4.3534788E-03),
+	   ZSL_CONSTANT(3.6196568E-03),
+	   ZSL_CONSTANT(-1.589747E-03),
+	   ZSL_CONSTANT(3.5700160E-04),
+	   ZSL_CONSTANT(-3.2325500E-05) },
 
 	/** ki0..ki6[2] */
-	{ -8.58308927E-01,
-	  1.964980251E+00,
-	  -1.873907584E+00,
-	  9.53570888E-01,
-	  -2.73172022E-01,
-	  4.17781315E-02,
-	  -2.6653835E-03 },
+	{ ZSL_CONSTANT(-8.58308927E-01),
+	  ZSL_CONSTANT(1.964980251E+00),
+	  ZSL_CONSTANT(-1.873907584E+00),
+	  ZSL_CONSTANT(9.53570888E-01),
+	  ZSL_CONSTANT(-2.73172022E-01),
+	  ZSL_CONSTANT(4.17781315E-02),
+	  ZSL_CONSTANT(-2.6653835E-03) },
 
 	/** ki0..ki6[3] */
-	{ -2.3275027E+02,
-	  1.49284136E+03,
-	  -2.7966888E+03,
-	  2.51170136E+03,
-	  -1.1785121E+03,
-	  2.7183365E+02,
-	  -2.3524950E+01 },
+	{ ZSL_CONSTANT(-2.3275027E+02),
+	  ZSL_CONSTANT(1.49284136E+03),
+	  ZSL_CONSTANT(-2.7966888E+03),
+	  ZSL_CONSTANT(2.51170136E+03),
+	  ZSL_CONSTANT(-1.1785121E+03),
+	  ZSL_CONSTANT(2.7183365E+02),
+	  ZSL_CONSTANT(-2.3524950E+01) },
 
 	/** ki0..ki6[4] */
-	{ -5.926850606E+08,
-	  1.34488160614E+09,
-	  -1.27141290956E+09,
-	  6.40976356945E+08,
-	  -1.81749963507E+08,
-	  2.7482732935E+07,
-	  -1.731364909E+06 },
+	{ ZSL_CONSTANT(-5.926850606E+08),
+	  ZSL_CONSTANT(1.34488160614E+09),
+	  ZSL_CONSTANT(-1.27141290956E+09),
+	  ZSL_CONSTANT(6.40976356945E+08),
+	  ZSL_CONSTANT(-1.81749963507E+08),
+	  ZSL_CONSTANT(2.7482732935E+07),
+	  ZSL_CONSTANT(-1.731364909E+06) },
 
 	/** ki0..ki6[5] */
-	{ -2.3758158E+06,
-	  3.89561742E+06,
-	  -2.65299138E+06,
-	  9.60532935E+05,
-	  -1.9500061E+05,
-	  2.10468274E+04,
-	  -9.4353083E+02 },
+	{ ZSL_CONSTANT(-2.3758158E+06),
+	  ZSL_CONSTANT(3.89561742E+06),
+	  ZSL_CONSTANT(-2.65299138E+06),
+	  ZSL_CONSTANT(9.60532935E+05),
+	  ZSL_CONSTANT(-1.9500061E+05),
+	  ZSL_CONSTANT(2.10468274E+04),
+	  ZSL_CONSTANT(-9.4353083E+02) },
 
 	/** ki0..ki6[6] */
-	{  2.8151771E+06,
-	   -4.11436958E+06,
-	   2.48526954E+06,
-	   -7.93406005E+05,
-	   1.4101538E+05,
-	   -1.321007E+04,
-	   5.0857956E+02 }
+	{  ZSL_CONSTANT(2.8151771E+06),
+	   ZSL_CONSTANT(-4.11436958E+06),
+	   ZSL_CONSTANT(2.48526954E+06),
+	   ZSL_CONSTANT(-7.93406005E+05),
+	   ZSL_CONSTANT(1.4101538E+05),
+	   ZSL_CONSTANT(-1.321007E+04),
+	   ZSL_CONSTANT(5.0857956E+02) }
 };
 
 /**
@@ -667,12 +667,12 @@ zsl_clr_conv_ct_xyz(zsl_real_t ct, enum zsl_clr_obs obs, struct zsl_clr_xyz *xyz
 	for (int nm = 360; nm <= 830; nm += 5) {
 		int i = (nm - 360) / 5;
 		/* Scale wavelength to micrometers. */
-		d_wl_m = nm * 1.0e-3;
+		d_wl_m = nm * ZSL_CONSTANT(1.0e-3);
 		/* d_wl_m^5. */
 		d_wl_m5 = d_wl_m * d_wl_m * d_wl_m * d_wl_m * d_wl_m;
 		/* Calculate black-body value. Source: Bruce Lindbloom */
-		bbody = c1 / (d_wl_m5 * 1.0e-12 *
-			      (expm1(c2 / (ct * d_wl_m * 1.0e-3))));
+		bbody = c1 / (d_wl_m5 * ZSL_CONSTANT(1.0e-12) *
+			      (expm1(c2 / (ct * d_wl_m * ZSL_CONSTANT(1.0e-3)))));
 		/* Calculate XYZ tristimulus using the std observer model. */
 		xyz->xyz_x += (bbody * obs_data->data[i].xyz_x);
 		xyz->xyz_y += (bbody * obs_data->data[i].xyz_y);

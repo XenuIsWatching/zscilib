@@ -90,9 +90,9 @@ static struct zsl_mtx zsl_clr_rgb_ccm_list[] = {
 	{ .sz_rows = 3,
 	  .sz_cols = 3,
 	  .data = (zsl_real_t[]) {
-		  1.04981102e+00, 0.00000000e+00, -9.74845410e-05,
-		  -4.95903023e-01, 1.37331305e+00, 9.82400365e-02,
-		  0.00000000e+00, 0.00000000e+00, 9.91252022e-01
+		  ZSL_CONSTANT(1.04981102e+00), ZSL_CONSTANT(0.00000000e+00), ZSL_CONSTANT(-9.74845410e-05),
+		  ZSL_CONSTANT(-4.95903023e-01), ZSL_CONSTANT(1.37331305e+00), ZSL_CONSTANT(9.82400365e-02),
+		  ZSL_CONSTANT(0.00000000e+00), ZSL_CONSTANT(0.00000000e+00), ZSL_CONSTANT(9.91252022e-01)
 	  } },
 
 	/* Source: Colour python library. */

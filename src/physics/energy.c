@@ -116,7 +116,7 @@ zsl_phy_ener_photon(zsl_real_t f, zsl_real_t *e)
 		return -EINVAL;
 	}
 
-	*e = (ZSL_PLANCK * f) / 1.602176634E-19;
+	*e = (ZSL_PLANCK * f) / ZSL_CONSTANT(1.602176634E-19);
 
 	return 0;
 }
@@ -130,9 +130,9 @@ zsl_phy_ener_photon2(zsl_real_t lambda, zsl_real_t *e)
 	}
 
         /* Scale lamba from nm to m. */
-        lambda *= 1E-9;
+        lambda *= ZSL_CONSTANT(1E-9);
 
-	*e = (ZSL_PLANCK * ZSL_LIGHT_SPEED) / (lambda * 1.602176634E-19);
+	*e = (ZSL_PLANCK * ZSL_LIGHT_SPEED) / (lambda * ZSL_CONSTANT(1.602176634E-19));
 
 	return 0;
 }

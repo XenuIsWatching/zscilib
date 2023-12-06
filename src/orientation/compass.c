@@ -64,7 +64,7 @@ int zsl_comp_magn_north(struct zsl_vec *m, zsl_real_t *d)
 	}
 #endif
 
-	if (ZSL_ABS(m->data[1]) < 1E-6) {
+	if (ZSL_ABS(m->data[1]) < ZSL_CONSTANT(1E-6)) {
 		if (m->data[0] > 0.0) {
 			*d = 0.0;
 		} else {
